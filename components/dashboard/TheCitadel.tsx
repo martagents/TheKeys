@@ -109,12 +109,21 @@ export default function TheCitadel() {
 
   // Home view (The Citadel) - Dashboard with tasks by pillar
   return (
-    <div className="min-h-screen bg-black p-6 pt-12 pb-24">
-      {/* Header */}
+    <div className="min-h-screen bg-black p-6 pt-12 pb-24 overflow-y-auto no-scrollbar">
+      {/* Radial gradient background for depth */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at center top, #0F0F0F 0%, #0A0A0A 50%, #000000 100%)',
+        }}
+      />
+
+      {/* Header - Rising from darkness */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        transition={{ delay: 0.2 }}
+        className="text-center mb-8 relative z-10"
       >
         <h1 className="font-serif text-4xl gold-gradient mb-2">The Citadel</h1>
         <p className="text-steel text-sm tracking-widest uppercase">
@@ -122,12 +131,16 @@ export default function TheCitadel() {
         </p>
       </motion.div>
 
-      {/* Warrior - Full width across top */}
-      <div className="max-w-2xl mx-auto mb-6">
+      {/* Warrior - Full width across top - Rising from bottom */}
+      <div className="max-w-2xl mx-auto mb-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-dark rounded-2xl p-6 border-2 border-orange-400/30"
+          transition={{ delay: 0.3, type: 'spring', damping: 20, stiffness: 100 }}
+          className="glass-pillar rounded-2xl p-6 border-2 border-orange-400/30"
+          style={{
+            boxShadow: '0 8px 32px rgba(251, 146, 60, 0.1)',
+          }}
         >
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-orange-400 flex items-center gap-2">
@@ -172,8 +185,8 @@ export default function TheCitadel() {
         </motion.div>
       </div>
 
-      {/* Other Pillars - Grid layout */}
-      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Other Pillars - Grid layout - Rising from bottom sequentially */}
+      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
         {/* Sharp */}
         <PillarCard
           title="Sharp"
@@ -182,6 +195,7 @@ export default function TheCitadel() {
           tasks={dailyTasks.sharp}
           onToggle={(id) => toggleTask('sharp', id)}
           onViewAll={() => setSelectedPillar('sharp')}
+          delay={0.4}
         />
 
         {/* Fitness */}
@@ -192,6 +206,7 @@ export default function TheCitadel() {
           tasks={dailyTasks.fitness}
           onToggle={(id) => toggleTask('fitness', id)}
           onViewAll={() => setSelectedPillar('fitness')}
+          delay={0.5}
         />
 
         {/* Presence */}
@@ -202,6 +217,7 @@ export default function TheCitadel() {
           tasks={dailyTasks.presence}
           onToggle={(id) => toggleTask('presence', id)}
           onViewAll={() => setSelectedPillar('presence')}
+          delay={0.6}
         />
 
         {/* Temple */}
@@ -212,6 +228,7 @@ export default function TheCitadel() {
           tasks={dailyTasks.temple}
           onToggle={(id) => toggleTask('temple', id)}
           onViewAll={() => setSelectedPillar('temple')}
+          delay={0.7}
         />
       </div>
 
@@ -257,6 +274,7 @@ function PillarCard({
   tasks,
   onToggle,
   onViewAll,
+  delay = 0,
 }: {
   title: string
   icon: string
@@ -264,12 +282,20 @@ function PillarCard({
   tasks: Array<{ id: string; name: string; completed: boolean; hasSubtasks?: boolean }>
   onToggle: (id: string) => void
   onViewAll: () => void
+  delay?: number
 }) {
+  const borderColor = `${color}33` // 20% opacity
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass-dark rounded-2xl p-5"
+      transition={{ delay, type: 'spring', damping: 20, stiffness: 100 }}
+      className="glass-pillar rounded-2xl p-5"
+      style={{
+        borderColor,
+        boxShadow: `0 8px 32px ${color}10`,
+      }}
     >
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
@@ -344,9 +370,12 @@ function BottomNav({
     <div className="fixed bottom-0 left-0 right-0 pb-8 px-6 z-20">
       <motion.div
         className="glass rounded-2xl p-4 flex items-center justify-around touch-target max-w-2xl mx-auto"
+        style={{
+          boxShadow: '0 -4px 24px rgba(0, 0, 0, 0.5)',
+        }}
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.8, type: 'spring', damping: 20 }}
       >
         {navItems.map((item) => (
           <button

@@ -36,7 +36,7 @@ body {
     background: rgba(26, 26, 26, 0.4);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
   }
 
   .glass-dark {
@@ -46,9 +46,25 @@ body {
     border: 1px solid rgba(142, 142, 147, 0.15);
   }
 
+  .glass-pillar {
+    background: rgba(15, 15, 15, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
   /* Touch target minimum for mobile */
   .touch-target {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
