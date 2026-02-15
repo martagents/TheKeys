@@ -66,7 +66,7 @@ export default function FitnessView() {
           className="text-center mb-8"
         >
           <h2 className="font-serif text-3xl gold-gradient mb-2">
-            Today's Workout
+            Today&apos;s Workout
           </h2>
           <p className="text-steel text-sm">
             Select workout type completed

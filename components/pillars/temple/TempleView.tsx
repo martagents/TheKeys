@@ -207,7 +207,7 @@ export default function TempleView() {
             {showSkincareDetail} Skincare
           </h2>
           <p className="text-steel text-sm mb-1">
-            {todayName}'s Routine
+            {todayName}&apos;s Routine
           </p>
           <p className="text-steel text-xs">
             {routine.filter((s) => s.completed).length} of {routine.length} steps complete
@@ -357,7 +357,7 @@ export default function TempleView() {
             Skincare Routines
           </h3>
           <p className="text-steel text-xs mb-4">
-            {todayName}'s Schedule
+            {todayName}&apos;s Schedule
           </p>
 
           <div className="space-y-3">

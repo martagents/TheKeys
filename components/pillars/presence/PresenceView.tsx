@@ -84,7 +84,7 @@ export default function PresenceView() {
               >
                 <div className="bg-luxury-charcoal/50 rounded-xl p-5 border border-purple-400/20">
                   <p className="text-white/90 leading-relaxed text-sm font-serif italic mb-4">
-                    "By the first day of January, 2027, I will have in my possession{' '}
+                    &ldquo;By the first day of January, 2027, I will have in my possession{' '}
                     <span className="text-gold font-bold">10m SGD</span> in liquid assets
                     with an active portfolio of{' '}
                     <span className="text-gold font-bold">100m SGD</span> assets.
@@ -93,7 +93,7 @@ export default function PresenceView() {
                     The money will come to me from time to time in various amounts in the
                     interim. For this money I will give the most valuable and impactful
                     delivery of services in the greatest volume and impact that I can, to
-                    enable our firm's delivery of transformative AI products and solutions
+                    enable our firm&apos;s delivery of transformative AI products and solutions
                     to businesses and individuals which changes their lives, businesses and
                     prospects.
                   </p>
