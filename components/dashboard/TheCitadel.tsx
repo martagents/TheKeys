@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import VitalityCore from './VitalityCore'
-import Pillar from './Pillar'
 import SharpView from '../pillars/sharp/SharpView'
 import FitnessView from '../pillars/fitness/FitnessView'
 import PresenceView from '../pillars/presence/PresenceView'
@@ -29,12 +27,38 @@ export default function TheCitadel() {
 
   // Mock data - will be replaced with Supabase data
   const pillars: PillarData[] = [
-    { id: 'sharp', name: 'Sharp', compliance: 75, color: '#60A5FA' },
-    { id: 'fitness', name: 'Fitness', compliance: 85, color: '#34D399' },
-    { id: 'presence', name: 'Presence', compliance: 60, color: '#A78BFA' },
-    { id: 'temple', name: 'Temple', compliance: 90, color: '#F472B6' },
-    { id: 'warrior', name: 'Warrior', compliance: 70, color: '#FB923C' },
+    { id: 'sharp', name: 'Sharp', compliance: 0, color: '#60A5FA' },
+    { id: 'fitness', name: 'Fitness', compliance: 0, color: '#34D399' },
+    { id: 'presence', name: 'Presence', compliance: 0, color: '#A78BFA' },
+    { id: 'temple', name: 'Temple', compliance: 0, color: '#F472B6' },
+    { id: 'warrior', name: 'Warrior', compliance: 0, color: '#FB923C' },
   ]
+
+  // Mock daily tasks
+  const [dailyTasks, setDailyTasks] = useState({
+    warrior: [
+      { id: 'w1', name: 'Daily 10X', completed: false },
+      { id: 'w2', name: 'Weekly Review (Friday)', completed: false },
+    ],
+    sharp: [
+      { id: 's1', name: 'Morning Routine', completed: false, hasSubtasks: true },
+      { id: 's2', name: '90m Focus Block', completed: false },
+    ],
+    fitness: [
+      { id: 'f1', name: 'Workout', completed: false, hasSubtasks: true },
+      { id: 'f2', name: '1400 Calories', completed: false },
+      { id: 'f3', name: '100g Protein', completed: false },
+      { id: 'f4', name: '2L Water', completed: false },
+      { id: 'f5', name: '10K Steps', completed: false },
+    ],
+    presence: [
+      { id: 'p1', name: 'Faith Statement', completed: false },
+    ],
+    temple: [
+      { id: 't1', name: 'Morning Skincare', completed: false },
+      { id: 't2', name: 'Night Skincare', completed: false },
+    ],
+  })
 
   // Render the current view
   if (currentView === 'today') {
@@ -73,25 +97,122 @@ export default function TheCitadel() {
     )
   }
 
-  // Home view (The Citadel)
+  const toggleTask = (pillar: string, taskId: string) => {
+    setDailyTasks((prev) => ({
+      ...prev,
+      [pillar]: prev[pillar as keyof typeof prev].map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      ),
+    }))
+    if ('vibrate' in navigator) navigator.vibrate(30)
+  }
+
+  // Home view (The Citadel) - Dashboard with tasks by pillar
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-luxury-dark via-luxury-charcoal to-black opacity-60" />
+    <div className="min-h-screen bg-black p-6 pt-12 pb-24">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-8"
+      >
+        <h1 className="font-serif text-4xl gold-gradient mb-2">The Citadel</h1>
+        <p className="text-steel text-sm tracking-widest uppercase">
+          Daily Command Center
+        </p>
+      </motion.div>
 
-      {/* Vitality Core */}
-      <VitalityCore />
+      {/* Warrior - Full width across top */}
+      <div className="max-w-2xl mx-auto mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass-dark rounded-2xl p-6 border-2 border-orange-400/30"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-orange-400 flex items-center gap-2">
+              <span>⚔️</span>
+              Warrior
+            </h2>
+            <button
+              onClick={() => setSelectedPillar('warrior')}
+              className="text-steel hover:text-white text-sm"
+            >
+              View All →
+            </button>
+          </div>
+          <div className="space-y-2">
+            {dailyTasks.warrior.map((task) => (
+              <button
+                key={task.id}
+                onClick={() => toggleTask('warrior', task.id)}
+                className={`w-full glass rounded-xl p-3 flex items-center gap-3 transition-all touch-target ${
+                  task.completed ? 'opacity-60' : ''
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                    task.completed
+                      ? 'bg-orange-400 border-orange-400'
+                      : 'border-steel/50'
+                  }`}
+                >
+                  {task.completed && <span className="text-white text-xs">✓</span>}
+                </div>
+                <span
+                  className={`text-left flex-1 ${
+                    task.completed ? 'text-steel line-through' : 'text-white'
+                  }`}
+                >
+                  {task.name}
+                </span>
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      </div>
 
-      {/* The Five Pillars */}
-      <div className="relative z-10 flex items-end justify-center gap-4 px-6 h-[60vh] mt-32">
-        {pillars.map((pillar, index) => (
-          <Pillar
-            key={pillar.id}
-            pillar={pillar}
-            index={index}
-            onSelect={() => setSelectedPillar(pillar.id)}
-          />
-        ))}
+      {/* Other Pillars - Grid layout */}
+      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Sharp */}
+        <PillarCard
+          title="Sharp"
+          icon="🧠"
+          color="#60A5FA"
+          tasks={dailyTasks.sharp}
+          onToggle={(id) => toggleTask('sharp', id)}
+          onViewAll={() => setSelectedPillar('sharp')}
+        />
+
+        {/* Fitness */}
+        <PillarCard
+          title="Fitness"
+          icon="💪"
+          color="#34D399"
+          tasks={dailyTasks.fitness}
+          onToggle={(id) => toggleTask('fitness', id)}
+          onViewAll={() => setSelectedPillar('fitness')}
+        />
+
+        {/* Presence */}
+        <PillarCard
+          title="Presence"
+          icon="🙏"
+          color="#A78BFA"
+          tasks={dailyTasks.presence}
+          onToggle={(id) => toggleTask('presence', id)}
+          onViewAll={() => setSelectedPillar('presence')}
+        />
+
+        {/* Temple */}
+        <PillarCard
+          title="Temple"
+          icon="✨"
+          color="#F472B6"
+          tasks={dailyTasks.temple}
+          onToggle={(id) => toggleTask('temple', id)}
+          onViewAll={() => setSelectedPillar('temple')}
+        />
       </div>
 
       {/* Bottom Navigation */}
@@ -125,6 +246,81 @@ export default function TheCitadel() {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+// Pillar Card Component
+function PillarCard({
+  title,
+  icon,
+  color,
+  tasks,
+  onToggle,
+  onViewAll,
+}: {
+  title: string
+  icon: string
+  color: string
+  tasks: Array<{ id: string; name: string; completed: boolean; hasSubtasks?: boolean }>
+  onToggle: (id: string) => void
+  onViewAll: () => void
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="glass-dark rounded-2xl p-5"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <span>{icon}</span>
+          {title}
+        </h2>
+        <button
+          onClick={onViewAll}
+          className="text-steel hover:text-white text-sm"
+        >
+          View →
+        </button>
+      </div>
+      <div className="space-y-2">
+        {tasks.slice(0, 3).map((task) => (
+          <button
+            key={task.id}
+            onClick={() => onToggle(task.id)}
+            className={`w-full glass rounded-xl p-3 flex items-center gap-3 transition-all touch-target ${
+              task.completed ? 'opacity-60' : ''
+            }`}
+          >
+            <div
+              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                task.completed ? 'border-transparent' : 'border-steel/50'
+              }`}
+              style={{
+                backgroundColor: task.completed ? color : 'transparent',
+              }}
+            >
+              {task.completed && <span className="text-white text-xs">✓</span>}
+            </div>
+            <span
+              className={`text-left flex-1 text-sm ${
+                task.completed ? 'text-steel line-through' : 'text-white'
+              }`}
+            >
+              {task.name}
+            </span>
+            {task.hasSubtasks && (
+              <span className="text-steel text-xs">📝</span>
+            )}
+          </button>
+        ))}
+        {tasks.length > 3 && (
+          <p className="text-steel text-xs text-center pt-1">
+            +{tasks.length - 3} more
+          </p>
+        )}
+      </div>
+    </motion.div>
   )
 }
 

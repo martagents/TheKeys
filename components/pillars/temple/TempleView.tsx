@@ -9,6 +9,12 @@ interface SkincareStep {
   completed: boolean
 }
 
+interface DailyRoutine {
+  day: string
+  morning: string[]
+  evening: string[]
+}
+
 interface SkincareRoutine {
   morning: SkincareStep[]
   night: SkincareStep[]
@@ -21,26 +27,68 @@ interface TempleHabit {
   lastCompleted: Date
 }
 
+// Daily face care schedule
+const weeklyFaceCareSchedule: DailyRoutine[] = [
+  {
+    day: 'Sunday',
+    morning: ['Cleanse', 'Toner', 'Vitamin C Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Toner', 'Retinol', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Monday',
+    morning: ['Cleanse', 'Toner', 'Hydrating Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Toner', 'Niacinamide', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Tuesday',
+    morning: ['Cleanse', 'Toner', 'Vitamin C Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Exfoliant (AHA/BHA)', 'Toner', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Wednesday',
+    morning: ['Cleanse', 'Toner', 'Peptide Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Toner', 'Retinol', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Thursday',
+    morning: ['Cleanse', 'Toner', 'Hyaluronic Acid', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Toner', 'Treatment Mask', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Friday',
+    morning: ['Cleanse', 'Toner', 'Vitamin C Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Exfoliant (Gentle)', 'Toner', 'Eye Cream', 'Night Cream']
+  },
+  {
+    day: 'Saturday',
+    morning: ['Cleanse', 'Toner', 'Brightening Serum', 'Moisturizer', 'Sunscreen'],
+    evening: ['Double Cleanse', 'Toner', 'Sheet Mask', 'Eye Cream', 'Night Cream']
+  }
+]
+
 export default function TempleView() {
   const [showSkincareDetail, setShowSkincareDetail] = useState<'morning' | 'night' | null>(null)
   const [editingRoutine, setEditingRoutine] = useState(false)
   const [newStepName, setNewStepName] = useState('')
 
+  // Get today's routine
+  const today = new Date()
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const todayName = dayNames[today.getDay()]
+  const todayRoutine = weeklyFaceCareSchedule.find(r => r.day === todayName) || weeklyFaceCareSchedule[0]
+
+  // Initialize skincare routine with today's schedule
   const [skincareRoutine, setSkincareRoutine] = useState<SkincareRoutine>({
-    morning: [
-      { id: '1', name: 'Cleanse', completed: false },
-      { id: '2', name: 'Toner', completed: false },
-      { id: '3', name: 'Serum', completed: false },
-      { id: '4', name: 'Moisturizer', completed: false },
-      { id: '5', name: 'Sunscreen', completed: false },
-    ],
-    night: [
-      { id: '6', name: 'Double Cleanse', completed: false },
-      { id: '7', name: 'Toner', completed: false },
-      { id: '8', name: 'Treatment/Retinol', completed: false },
-      { id: '9', name: 'Eye Cream', completed: false },
-      { id: '10', name: 'Night Cream', completed: false },
-    ],
+    morning: todayRoutine.morning.map((step, i) => ({
+      id: `m${i}`,
+      name: step,
+      completed: false
+    })),
+    night: todayRoutine.evening.map((step, i) => ({
+      id: `n${i}`,
+      name: step,
+      completed: false
+    })),
   })
 
   const [habits, setHabits] = useState<TempleHabit[]>([
@@ -158,7 +206,10 @@ export default function TempleView() {
           <h2 className="font-serif text-3xl gold-gradient mb-2 capitalize">
             {showSkincareDetail} Skincare
           </h2>
-          <p className="text-steel text-sm">
+          <p className="text-steel text-sm mb-1">
+            {todayName}'s Routine
+          </p>
+          <p className="text-steel text-xs">
             {routine.filter((s) => s.completed).length} of {routine.length} steps complete
           </p>
         </motion.div>
@@ -301,10 +352,13 @@ export default function TempleView() {
       <div className="space-y-6 max-w-md mx-auto">
         {/* Skincare Routines */}
         <div className="glass-dark rounded-2xl p-6">
-          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+          <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
             <span className="text-pink-400">✨</span>
             Skincare Routines
           </h3>
+          <p className="text-steel text-xs mb-4">
+            {todayName}'s Schedule
+          </p>
 
           <div className="space-y-3">
             {/* Morning Routine */}

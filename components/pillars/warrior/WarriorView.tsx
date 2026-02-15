@@ -11,6 +11,7 @@ interface System {
 
 export default function WarriorView() {
   const [daily10x, setDaily10x] = useState('')
+  const [weeklyPlan, setWeeklyPlan] = useState('')
   const [newSystem, setNewSystem] = useState('')
   const [showForge, setShowForge] = useState(false)
   const [systems, setSystems] = useState<System[]>([
@@ -42,6 +43,10 @@ export default function WarriorView() {
   const filteredSystems = systems.filter((s) =>
     s.content.toLowerCase().includes(searchQuery.toLowerCase())
   )
+
+  // Check if today is Friday
+  const today = new Date()
+  const isFriday = today.getDay() === 5
 
   return (
     <div className="min-h-screen bg-black p-6 pt-16 pb-24">
@@ -79,6 +84,30 @@ export default function WarriorView() {
             </button>
           )}
         </div>
+
+        {/* Weekly Planning - Only on Fridays */}
+        {isFriday && (
+          <div className="glass-dark rounded-2xl p-6 border-2 border-gold/30">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+              <span className="text-gold">📋</span>
+              Weekly Planning
+            </h3>
+            <p className="text-steel text-xs mb-3">
+              Plan your week ahead every Friday
+            </p>
+            <textarea
+              value={weeklyPlan}
+              onChange={(e) => setWeeklyPlan(e.target.value)}
+              placeholder="What are your top 3 priorities for next week?"
+              className="w-full bg-luxury-charcoal border border-steel/30 rounded-xl px-4 py-3 text-white placeholder-steel/50 focus:border-gold focus:outline-none resize-none h-32"
+            />
+            {weeklyPlan && (
+              <button className="mt-3 w-full glass rounded-xl py-3 text-gold font-medium touch-target hover:bg-gold/10 transition-colors">
+                Save Weekly Plan
+              </button>
+            )}
+          </div>
+        )}
 
         {/* The Forge - Add New System */}
         <div className="glass-dark rounded-2xl p-6">
