@@ -24,6 +24,15 @@ body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   }
 
+  /* Radial gradient for depth and atmosphere - "The Obsidian" */
+  .obsidian-bg {
+    background: radial-gradient(circle at center, #0F0F0F 0%, #0A0A0A 60%, #000000 100%);
+  }
+
+  .obsidian-bg-top {
+    background: radial-gradient(circle at center top, #0F0F0F 0%, #0A0A0A 50%, #000000 100%);
+  }
+
   .gold-gradient {
     background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
     -webkit-background-clip: text;

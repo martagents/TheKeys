@@ -109,40 +109,35 @@ export default function TheCitadel() {
 
   // Home view (The Citadel) - Dashboard with tasks by pillar
   return (
-    <div className="min-h-screen bg-black p-6 pt-12 pb-24 overflow-y-auto no-scrollbar">
-      {/* Radial gradient background for depth */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at center top, #0F0F0F 0%, #0A0A0A 50%, #000000 100%)',
-        }}
-      />
+    <div className="h-screen bg-black p-4 pt-6 pb-24 overflow-y-auto no-scrollbar">
+      {/* Radial gradient background for depth - using utility class */}
+      <div className="fixed inset-0 pointer-events-none obsidian-bg-top" />
 
       {/* Header - Rising from darkness */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="text-center mb-8 relative z-10"
+        className="text-center mb-4 relative z-10"
       >
-        <h1 className="font-serif text-4xl gold-gradient mb-2">The Citadel</h1>
-        <p className="text-steel text-sm tracking-widest uppercase">
+        <h1 className="font-serif text-3xl gold-gradient mb-1">The Citadel</h1>
+        <p className="text-steel text-xs tracking-widest uppercase">
           Daily Command Center
         </p>
       </motion.div>
 
       {/* Warrior - Full width across top - Rising from bottom */}
-      <div className="max-w-2xl mx-auto mb-6 relative z-10">
+      <div className="max-w-2xl mx-auto mb-3 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, type: 'spring', damping: 20, stiffness: 100 }}
-          className="glass-pillar rounded-2xl p-6 border-2 border-orange-400/30"
+          className="glass-pillar rounded-2xl p-4 border-2 border-orange-400/30"
           style={{
             boxShadow: '0 8px 32px rgba(251, 146, 60, 0.1)',
           }}
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             <h2 className="text-xl font-semibold text-orange-400 flex items-center gap-2">
               <span>⚔️</span>
               Warrior
@@ -186,7 +181,7 @@ export default function TheCitadel() {
       </div>
 
       {/* Other Pillars - Grid layout - Rising from bottom sequentially */}
-      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10">
         {/* Sharp */}
         <PillarCard
           title="Sharp"
@@ -291,13 +286,13 @@ function PillarCard({
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, type: 'spring', damping: 20, stiffness: 100 }}
-      className="glass-pillar rounded-2xl p-5"
+      className="glass-pillar rounded-2xl p-4"
       style={{
         borderColor,
         boxShadow: `0 8px 32px ${color}10`,
       }}
     >
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-2">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
           <span>{icon}</span>
           {title}
@@ -309,12 +304,12 @@ function PillarCard({
           View →
         </button>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {tasks.slice(0, 3).map((task) => (
           <button
             key={task.id}
             onClick={() => onToggle(task.id)}
-            className={`w-full glass rounded-xl p-3 flex items-center gap-3 transition-all touch-target ${
+            className={`w-full glass rounded-xl p-2.5 flex items-center gap-2.5 transition-all touch-target ${
               task.completed ? 'opacity-60' : ''
             }`}
           >

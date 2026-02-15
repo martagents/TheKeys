@@ -60,12 +60,7 @@ export default function TheVow({ onComplete }: TheVowProps) {
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
       {/* Radial gradient background - the "Obsidian" atmosphere */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(circle at center, #0F0F0F 0%, #0A0A0A 60%, #000000 100%)',
-        }}
-      />
+      <div className="absolute inset-0 obsidian-bg" />
 
       <AnimatePresence mode="wait">
         {!showText ? (
@@ -102,18 +97,19 @@ export default function TheVow({ onComplete }: TheVowProps) {
                 style={{
                   background: 'radial-gradient(circle, #F4D03F 0%, #D4AF37 50%, #B8860B 100%)',
                   boxShadow: `
-                    0 0 50px rgba(212, 175, 55, 0.6),
-                    0 0 100px rgba(212, 175, 55, 0.4),
-                    0 0 150px rgba(212, 175, 55, 0.2),
-                    inset 0 0 20px rgba(244, 208, 63, 0.8)
+                    0 0 40px rgba(244, 208, 63, 0.8),
+                    0 0 80px rgba(212, 175, 55, 0.6),
+                    0 0 120px rgba(212, 175, 55, 0.4),
+                    0 0 200px rgba(212, 175, 55, 0.2),
+                    inset 0 0 30px rgba(244, 208, 63, 0.9)
                   `,
                 }}
                 animate={{
                   opacity: [0.9, 1, 0.9],
                   filter: [
-                    'brightness(1)',
-                    'brightness(1.2)',
-                    'brightness(1)',
+                    'brightness(1.1)',
+                    'brightness(1.3)',
+                    'brightness(1.1)',
                   ],
                 }}
                 transition={{
