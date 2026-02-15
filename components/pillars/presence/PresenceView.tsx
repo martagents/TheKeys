@@ -11,7 +11,7 @@ interface Spark {
 }
 
 export default function PresenceView() {
-  const [faithCompleted, setFaithCompleted] = useState(false)
+  const [showFaithStatement, setShowFaithStatement] = useState(false)
   const [mood, setMood] = useState<string>('')
   const [sparks, setSparks] = useState<Spark[]>([
     { id: '1', item: 'Leather journal', purchased: false },
@@ -56,32 +56,60 @@ export default function PresenceView() {
       </motion.div>
 
       <div className="space-y-6 max-w-md mx-auto">
-        {/* Faith Revisit */}
+        {/* Faith Statement */}
         <div className="glass-dark rounded-2xl p-6">
-          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-purple-400">✨</span>
-            Faith Revisit
-          </h3>
           <button
             onClick={() => {
-              setFaithCompleted(!faithCompleted)
+              setShowFaithStatement(!showFaithStatement)
               if ('vibrate' in navigator) navigator.vibrate(30)
             }}
-            className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
-              faithCompleted
-                ? 'bg-purple-400/10 border-purple-400'
-                : 'bg-steel/5 border-steel/30'
-            }`}
+            className="w-full flex items-center justify-between mb-4"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-white">Completed today</span>
-              <div
-                className={`w-6 h-6 rounded-full ${
-                  faithCompleted ? 'bg-purple-400' : 'bg-steel/30'
-                }`}
-              />
-            </div>
+            <h3 className="text-white font-semibold flex items-center gap-2">
+              <span className="text-purple-400">✨</span>
+              Faith Statement
+            </h3>
+            <span className="text-steel text-lg">
+              {showFaithStatement ? '−' : '+'}
+            </span>
           </button>
+
+          <AnimatePresence>
+            {showFaithStatement && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-luxury-charcoal/50 rounded-xl p-5 border border-purple-400/20">
+                  <p className="text-white/90 leading-relaxed text-sm font-serif italic mb-4">
+                    "By the first day of January, 2027, I will have in my possession{' '}
+                    <span className="text-gold font-bold">10m SGD</span> in liquid assets
+                    with an active portfolio of{' '}
+                    <span className="text-gold font-bold">100m SGD</span> assets.
+                  </p>
+                  <p className="text-white/90 leading-relaxed text-sm font-serif italic mb-4">
+                    The money will come to me from time to time in various amounts in the
+                    interim. For this money I will give the most valuable and impactful
+                    delivery of services in the greatest volume and impact that I can, to
+                    enable our firm's delivery of transformative AI products and solutions
+                    to businesses and individuals which changes their lives, businesses and
+                    prospects.
+                  </p>
+                  <p className="text-white/90 leading-relaxed text-sm font-serif italic mb-4">
+                    I believe that I will have this money in my possession and my faith is
+                    so strong that I can now see this money before my eyes, I can touch it
+                    with my hands, it is now awaiting transfer to me at the time and in the
+                    proportion that I deliver the service in return for this money.
+                  </p>
+                  <p className="text-gold/90 leading-relaxed text-sm font-serif italic font-semibold">
+                    I am awaiting the plan and I will follow that plan when it is received.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Mood Log */}

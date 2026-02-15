@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 export default function FitnessView() {
   const [caloriesMet, setCaloriesMet] = useState(false)
   const [proteinMet, setProteinMet] = useState(false)
+  const [waterMet, setWaterMet] = useState(false)
   const [steps, setSteps] = useState(0)
   const [weight, setWeight] = useState('')
 
@@ -74,6 +75,27 @@ export default function FitnessView() {
                 <div
                   className={`w-6 h-6 rounded-full ${
                     proteinMet ? 'bg-green-400' : 'bg-steel/30'
+                  }`}
+                />
+              </div>
+            </button>
+
+            <button
+              onClick={() => {
+                setWaterMet(!waterMet)
+                if ('vibrate' in navigator) navigator.vibrate(30)
+              }}
+              className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
+                waterMet
+                  ? 'bg-blue-400/10 border-blue-400'
+                  : 'bg-steel/5 border-steel/30'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-white">2L Water</span>
+                <div
+                  className={`w-6 h-6 rounded-full ${
+                    waterMet ? 'bg-blue-400' : 'bg-steel/30'
                   }`}
                 />
               </div>

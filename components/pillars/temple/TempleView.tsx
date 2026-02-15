@@ -1,7 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+
+interface SkincareStep {
+  id: string
+  name: string
+  completed: boolean
+}
+
+interface SkincareRoutine {
+  morning: SkincareStep[]
+  night: SkincareStep[]
+}
 
 interface TempleHabit {
   id: string
@@ -11,13 +22,28 @@ interface TempleHabit {
 }
 
 export default function TempleView() {
+  const [showSkincareDetail, setShowSkincareDetail] = useState<'morning' | 'night' | null>(null)
+  const [editingRoutine, setEditingRoutine] = useState(false)
+  const [newStepName, setNewStepName] = useState('')
+
+  const [skincareRoutine, setSkincareRoutine] = useState<SkincareRoutine>({
+    morning: [
+      { id: '1', name: 'Cleanse', completed: false },
+      { id: '2', name: 'Toner', completed: false },
+      { id: '3', name: 'Serum', completed: false },
+      { id: '4', name: 'Moisturizer', completed: false },
+      { id: '5', name: 'Sunscreen', completed: false },
+    ],
+    night: [
+      { id: '6', name: 'Double Cleanse', completed: false },
+      { id: '7', name: 'Toner', completed: false },
+      { id: '8', name: 'Treatment/Retinol', completed: false },
+      { id: '9', name: 'Eye Cream', completed: false },
+      { id: '10', name: 'Night Cream', completed: false },
+    ],
+  })
+
   const [habits, setHabits] = useState<TempleHabit[]>([
-    {
-      id: 'skin',
-      name: 'Skin Care',
-      frequency: 1,
-      lastCompleted: new Date(Date.now() - 0.5 * 24 * 60 * 60 * 1000),
-    },
     {
       id: 'hair',
       name: 'Hair (3min)',
@@ -37,6 +63,39 @@ export default function TempleView() {
       lastCompleted: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
     },
   ])
+
+  const toggleSkincareStep = (routine: 'morning' | 'night', stepId: string) => {
+    setSkincareRoutine((prev) => ({
+      ...prev,
+      [routine]: prev[routine].map((step) =>
+        step.id === stepId ? { ...step, completed: !step.completed } : step
+      ),
+    }))
+    if ('vibrate' in navigator) navigator.vibrate(30)
+  }
+
+  const addSkincareStep = (routine: 'morning' | 'night') => {
+    if (newStepName.trim()) {
+      const newStep: SkincareStep = {
+        id: Date.now().toString(),
+        name: newStepName,
+        completed: false,
+      }
+      setSkincareRoutine((prev) => ({
+        ...prev,
+        [routine]: [...prev[routine], newStep],
+      }))
+      setNewStepName('')
+      if ('vibrate' in navigator) navigator.vibrate(30)
+    }
+  }
+
+  const removeSkincareStep = (routine: 'morning' | 'night', stepId: string) => {
+    setSkincareRoutine((prev) => ({
+      ...prev,
+      [routine]: prev[routine].filter((step) => step.id !== stepId),
+    }))
+  }
 
   const calculateDecay = (habit: TempleHabit) => {
     const now = new Date()
@@ -68,6 +127,163 @@ export default function TempleView() {
     return 'Eroded'
   }
 
+  const getSkincareProgress = (routine: 'morning' | 'night') => {
+    const steps = skincareRoutine[routine]
+    const completed = steps.filter((s) => s.completed).length
+    return Math.round((completed / steps.length) * 100)
+  }
+
+  // Skincare detail modal
+  if (showSkincareDetail) {
+    const routine = skincareRoutine[showSkincareDetail]
+    const progress = getSkincareProgress(showSkincareDetail)
+
+    return (
+      <div className="min-h-screen bg-black p-6 pt-16 pb-24">
+        <button
+          onClick={() => {
+            setShowSkincareDetail(null)
+            setEditingRoutine(false)
+          }}
+          className="mb-6 text-steel hover:text-white transition-colors"
+        >
+          ← Back
+        </button>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <h2 className="font-serif text-3xl gold-gradient mb-2 capitalize">
+            {showSkincareDetail} Skincare
+          </h2>
+          <p className="text-steel text-sm">
+            {routine.filter((s) => s.completed).length} of {routine.length} steps complete
+          </p>
+        </motion.div>
+
+        {/* Progress ring */}
+        <div className="relative w-40 h-40 mx-auto mb-8">
+          <svg className="w-full h-full -rotate-90">
+            <circle
+              cx="50%"
+              cy="50%"
+              r="70"
+              fill="none"
+              stroke="rgba(142, 142, 147, 0.1)"
+              strokeWidth="10"
+            />
+            <motion.circle
+              cx="50%"
+              cy="50%"
+              r="70"
+              fill="none"
+              stroke="#F472B6"
+              strokeWidth="10"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: progress / 100 }}
+              style={{ strokeDasharray: '1 1' }}
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-4xl font-bold text-pink-400">{progress}%</span>
+          </div>
+        </div>
+
+        {/* Steps checklist */}
+        <div className="space-y-3 max-w-md mx-auto mb-6">
+          <AnimatePresence>
+            {routine.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ delay: index * 0.05 }}
+                className={`glass-dark rounded-xl p-4 flex items-center justify-between ${
+                  step.completed ? 'bg-pink-400/10' : ''
+                }`}
+              >
+                <button
+                  onClick={() => toggleSkincareStep(showSkincareDetail, step.id)}
+                  className="flex items-center gap-3 flex-1"
+                >
+                  <div
+                    className={`w-6 h-6 rounded border-2 flex items-center justify-center ${
+                      step.completed
+                        ? 'bg-pink-400 border-pink-400'
+                        : 'border-steel/50'
+                    }`}
+                  >
+                    {step.completed && <span className="text-white text-sm">✓</span>}
+                  </div>
+                  <span
+                    className={`${
+                      step.completed ? 'text-steel line-through' : 'text-white'
+                    }`}
+                  >
+                    {step.name}
+                  </span>
+                </button>
+
+                {editingRoutine && (
+                  <button
+                    onClick={() => removeSkincareStep(showSkincareDetail, step.id)}
+                    className="text-red-400 text-xs ml-2 hover:text-red-300"
+                  >
+                    Remove
+                  </button>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Edit routine controls */}
+        <div className="max-w-md mx-auto">
+          {!editingRoutine ? (
+            <button
+              onClick={() => setEditingRoutine(true)}
+              className="w-full glass rounded-xl py-3 text-steel hover:bg-white/10 transition-colors"
+            >
+              ✏️ Edit Routine
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={newStepName}
+                  onChange={(e) => setNewStepName(e.target.value)}
+                  onKeyDown={(e) =>
+                    e.key === 'Enter' && addSkincareStep(showSkincareDetail)
+                  }
+                  placeholder="Add new step..."
+                  className="flex-1 bg-luxury-charcoal border border-steel/30 rounded-xl px-4 py-3 text-white placeholder-steel/50 focus:border-gold focus:outline-none"
+                />
+                <button
+                  onClick={() => addSkincareStep(showSkincareDetail)}
+                  className="glass px-4 rounded-xl text-gold hover:bg-gold/10"
+                >
+                  + Add
+                </button>
+              </div>
+              <button
+                onClick={() => setEditingRoutine(false)}
+                className="w-full glass rounded-xl py-3 text-white hover:bg-white/10 transition-colors"
+              >
+                Done Editing
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  // Main temple view
   return (
     <div className="min-h-screen bg-black p-6 pt-16 pb-24">
       {/* Header */}
@@ -83,6 +299,61 @@ export default function TempleView() {
       </motion.div>
 
       <div className="space-y-6 max-w-md mx-auto">
+        {/* Skincare Routines */}
+        <div className="glass-dark rounded-2xl p-6">
+          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+            <span className="text-pink-400">✨</span>
+            Skincare Routines
+          </h3>
+
+          <div className="space-y-3">
+            {/* Morning Routine */}
+            <button
+              onClick={() => setShowSkincareDetail('morning')}
+              className="w-full glass rounded-xl p-4 text-left hover:bg-white/10 transition-colors touch-target"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">Morning Routine</p>
+                  <p className="text-steel text-xs mt-1">
+                    {skincareRoutine.morning.filter((s) => s.completed).length} /{' '}
+                    {skincareRoutine.morning.length} steps
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-pink-400 font-bold">
+                    {getSkincareProgress('morning')}%
+                  </p>
+                  <p className="text-steel text-xs">→</p>
+                </div>
+              </div>
+            </button>
+
+            {/* Night Routine */}
+            <button
+              onClick={() => setShowSkincareDetail('night')}
+              className="w-full glass rounded-xl p-4 text-left hover:bg-white/10 transition-colors touch-target"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">Night Routine</p>
+                  <p className="text-steel text-xs mt-1">
+                    {skincareRoutine.night.filter((s) => s.completed).length} /{' '}
+                    {skincareRoutine.night.length} steps
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-pink-400 font-bold">
+                    {getSkincareProgress('night')}%
+                  </p>
+                  <p className="text-steel text-xs">→</p>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Other Temple Habits */}
         {habits.map((habit, index) => {
           const decay = calculateDecay(habit)
           const decayColor = getDecayColor(decay)
@@ -104,22 +375,16 @@ export default function TempleView() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p
-                    className="text-xs font-bold"
-                    style={{ color: decayColor }}
-                  >
+                  <p className="text-xs font-bold" style={{ color: decayColor }}>
                     {decayStatus}
                   </p>
-                  <p className="text-steel text-xs">
-                    {Math.round(decay * 100)}%
-                  </p>
+                  <p className="text-steel text-xs">{Math.round(decay * 100)}%</p>
                 </div>
               </div>
 
               {/* Decay Ring */}
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <svg className="w-full h-full -rotate-90">
-                  {/* Background ring */}
                   <circle
                     cx="50%"
                     cy="50%"
@@ -128,8 +393,6 @@ export default function TempleView() {
                     stroke="rgba(142, 142, 147, 0.1)"
                     strokeWidth="8"
                   />
-
-                  {/* Decay ring */}
                   <motion.circle
                     cx="50%"
                     cy="50%"
@@ -148,8 +411,6 @@ export default function TempleView() {
                           : 'none',
                     }}
                   />
-
-                  {/* Crack overlay when decaying */}
                   {decay < 0.3 && (
                     <motion.circle
                       cx="50%"
@@ -165,19 +426,13 @@ export default function TempleView() {
                     />
                   )}
                 </svg>
-
-                {/* Center percentage */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="text-3xl font-bold"
-                    style={{ color: decayColor }}
-                  >
+                  <span className="text-3xl font-bold" style={{ color: decayColor }}>
                     {Math.round(decay * 100)}
                   </span>
                 </div>
               </div>
 
-              {/* Action button */}
               <button
                 onClick={() => markComplete(habit.id)}
                 className="w-full glass rounded-xl py-3 text-white font-medium touch-target hover:bg-white/10 transition-colors"
