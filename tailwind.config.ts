@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        obsidian: "#0A0A0A",
+        gold: "#D4AF37",
+        steel: "#8E8E93",
         luxury: {
           dark: "#0a0a0a",
           charcoal: "#1a1a1a",

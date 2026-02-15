@@ -14,8 +14,15 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "TheKeys - Luxury Real Estate",
-  description: "Unlock exclusive luxury properties",
+  title: "The Keys - Life OS",
+  description: "High-performance ritual app for maintaining physical, mental, and spiritual pillars",
+  manifest: "/manifest.json",
+  themeColor: "#0A0A0A",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({
