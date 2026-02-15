@@ -124,33 +124,6 @@ export default function TheCitadel() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Pillar detail views */}
-      <AnimatePresence>
-        {selectedPillar && (
-          <motion.div
-            className="fixed inset-0 bg-black z-30"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          >
-            {/* Back button */}
-            <button
-              onClick={() => setSelectedPillar(null)}
-              className="fixed top-6 left-6 z-40 text-steel hover:text-white transition-colors touch-target"
-            >
-              ← Back
-            </button>
-
-            {/* Render the appropriate pillar view */}
-            {selectedPillar === 'sharp' && <SharpView />}
-            {selectedPillar === 'fitness' && <FitnessView />}
-            {selectedPillar === 'presence' && <PresenceView />}
-            {selectedPillar === 'temple' && <TempleView />}
-            {selectedPillar === 'warrior' && <WarriorView />}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
