@@ -76,7 +76,7 @@ export default function AnalyticsView() {
   }
 
   return (
-    <div className="min-h-screen bg-black p-6 pt-16 pb-40">
+    <div className="min-h-screen p-6 pt-16 pb-40">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

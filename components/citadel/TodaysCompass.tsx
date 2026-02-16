@@ -57,11 +57,15 @@ export default function TodaysCompass() {
     >
       {/* Title */}
       <div className="flex items-center justify-center gap-3 mb-4">
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
-        <h2 className="font-serif text-3xl text-gold font-bold tracking-widest">
-          TODAY&apos;S COMPASS
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-gold"></div>
+        <h2 className="script-font text-4xl text-gold"
+          style={{
+            textShadow: '0 0 20px rgba(212, 175, 55, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)'
+          }}
+        >
+          Today&apos;s Compass
         </h2>
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-gold"></div>
       </div>
 
       {/* Compass Items */}
@@ -77,13 +81,18 @@ export default function TodaysCompass() {
             {/* Checkbox */}
             <button
               onClick={() => toggleItem(item.id)}
-              className={`w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+              className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
                 item.completed
-                  ? 'bg-green-500/20 border-green-500'
-                  : 'border-gold/40 hover:border-gold'
+                  ? 'bg-green-500/30 shadow-lg'
+                  : 'bg-black/50 hover:bg-gold/20'
               }`}
+              style={{
+                boxShadow: item.completed
+                  ? '0 0 15px rgba(34, 197, 94, 0.5)'
+                  : '0 2px 8px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(212, 175, 55, 0.3)'
+              }}
             >
-              {item.completed && <span className="text-green-500 text-sm">✓</span>}
+              {item.completed && <span className="text-green-400 text-base">✓</span>}
             </button>
 
             {/* Text Input */}
@@ -91,16 +100,19 @@ export default function TodaysCompass() {
               type="text"
               value={item.text}
               onChange={(e) => updateItemText(item.id, e.target.value)}
-              className={`flex-1 bg-transparent border-none text-white/80 font-serif text-sm focus:outline-none focus:text-white ${
+              className={`flex-1 bg-transparent border-none text-parchment body-font text-base focus:outline-none focus:text-white ${
                 item.completed ? 'line-through opacity-60' : ''
               }`}
+              style={{
+                textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)'
+              }}
               placeholder="Add task..."
             />
 
             {/* Delete Button */}
             <button
               onClick={() => deleteItem(item.id)}
-              className="w-6 h-6 flex items-center justify-center text-steel hover:text-red-400 transition-colors flex-shrink-0"
+              className="w-7 h-7 flex items-center justify-center text-steel hover:text-red-400 transition-colors flex-shrink-0 opacity-50 hover:opacity-100"
             >
               ✕
             </button>
@@ -112,9 +124,9 @@ export default function TodaysCompass() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="flex items-center gap-3 pt-2"
+          className="flex items-center gap-3 pt-2 opacity-70 hover:opacity-100 transition-opacity"
         >
-          <div className="w-6 h-6 flex-shrink-0"></div>
+          <div className="w-7 h-7 flex-shrink-0"></div>
           <input
             type="text"
             value={newItemText}
@@ -124,13 +136,16 @@ export default function TodaysCompass() {
                 addItem()
               }
             }}
-            className="flex-1 bg-transparent border-b border-gold/30 text-white font-serif text-sm focus:outline-none focus:border-gold pb-1"
+            className="flex-1 bg-transparent border-b border-gold/20 text-parchment body-font text-base focus:outline-none focus:border-gold/60 pb-1"
+            style={{
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)'
+            }}
             placeholder="+ Add new item..."
           />
           {newItemText && (
             <button
               onClick={addItem}
-              className="text-gold hover:text-gold-light text-sm font-semibold transition-colors"
+              className="text-gold hover:text-gold-light text-sm title-font font-semibold transition-colors px-3 py-1 rounded-full bg-gold/10 hover:bg-gold/20"
             >
               Add
             </button>

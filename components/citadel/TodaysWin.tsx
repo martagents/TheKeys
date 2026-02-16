@@ -14,27 +14,31 @@ export default function TodaysWin() {
       className="relative z-10"
     >
       {/* Title */}
-      <div className="flex items-center justify-center gap-3 mb-3">
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
-        <h2 className="font-serif text-3xl text-gold font-bold tracking-widest">
-          TODAY&apos;S WIN
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-gold"></div>
+        <h2 className="script-font text-4xl text-gold"
+          style={{
+            textShadow: '0 0 20px rgba(212, 175, 55, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)'
+          }}
+        >
+          Today&apos;s Win
         </h2>
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-gold"></div>
       </div>
 
       {/* Win Box */}
       <div
-        className="cosmic-panel rounded-2xl p-4"
-        style={{
-          border: '2px solid rgba(212, 175, 55, 0.4)',
-        }}
+        className="glass rounded-2xl p-6"
       >
         <textarea
           value={win}
           onChange={(e) => setWin(e.target.value)}
-          className="w-full bg-transparent border-none text-white font-serif text-center text-base focus:outline-none resize-none"
-          placeholder="What&apos;s your win today?"
-          rows={2}
+          className="w-full bg-transparent border-none text-parchment body-font italic text-center text-lg focus:outline-none resize-none placeholder-parchment-dark"
+          style={{
+            textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)'
+          }}
+          placeholder="What's your win today?"
+          rows={3}
         />
       </div>
     </motion.div>

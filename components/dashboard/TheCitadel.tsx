@@ -159,33 +159,57 @@ export default function TheCitadel() {
 
   // Home view (Founder OS) - Dashboard with tasks by pillar
   return (
-    <div className="h-screen p-4 pt-6 pb-40 overflow-y-auto no-scrollbar bg-black relative">
-      {/* Cosmic fire particle background */}
-      <div className="fixed inset-0 fantasy-bg-cosmic" />
+    <div className="h-screen p-4 pt-6 pb-40 overflow-y-auto no-scrollbar relative">
+      {/* Fantasy mystical background */}
+      <div className="fixed inset-0 fantasy-bg" />
 
       {/* Ornate corner decorations */}
       <OrnateCorners />
 
-      {/* Header - FOUNDER OS */}
+      {/* Header - THE KEYS / FOUNDER OS */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="text-center mb-3 relative z-10"
+        className="text-center mb-6 relative z-10"
       >
-        <h1 className="font-serif text-2xl md:text-3xl bronze-gradient font-bold tracking-widest mb-1">
+        {/* Ornate decorative flourish */}
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold to-gold"></div>
+          <div className="ornate-diamond"></div>
+          <div className="h-px w-16 bg-gradient-to-l from-transparent via-gold to-gold"></div>
+        </div>
+
+        {/* THE KEYS */}
+        <p className="text-gold text-sm tracking-[0.3em] mb-2 title-font font-medium">
+          THE KEYS
+        </p>
+
+        {/* FOUNDER OS */}
+        <h1 className="title-font text-4xl md:text-5xl gold-gradient font-black tracking-widest mb-3"
+          style={{
+            textShadow: '0 0 30px rgba(212, 175, 55, 0.5), 0 0 10px rgba(255, 215, 0, 0.3)'
+          }}
+        >
           FOUNDER OS
         </h1>
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold"></div>
+
+        {/* Divider with diamond */}
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
           <span className="text-gold text-xs">◆</span>
-          <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold"></div>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
         </div>
+
+        {/* Quote */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-parchment text-sm font-serif italic max-w-md mx-auto px-4"
+          className="script-font text-2xl text-parchment max-w-md mx-auto px-4"
+          style={{
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)'
+          }}
         >
           I am not measured by my input, but by my output.
         </motion.p>
@@ -195,48 +219,59 @@ export default function TheCitadel() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.15 }}
-        className="max-w-2xl mx-auto mb-3 relative z-10"
+        transition={{ delay: 0.4 }}
+        className="max-w-2xl mx-auto mb-6 relative z-10"
       >
-        <div className="grid grid-cols-2 gap-3">
+        <div className="glass rounded-2xl p-4 flex items-center justify-around">
           {/* Momentum Score */}
-          <div className="parchment rounded-xl p-3 text-center">
-            <p className="text-bronze-darker text-[10px] uppercase tracking-widest mb-1 font-bold">
+          <div className="text-center flex-1">
+            <p className="script-font text-xl text-gold mb-2">
               Momentum Score
             </p>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-3">
               <motion.span
                 key={momentumScore}
-                initial={{ scale: 1.2, opacity: 0 }}
+                initial={{ scale: 1.3, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                style={{ color: '#FF8C00' }}
-                className="text-4xl font-bold"
+                className="title-font text-6xl font-black"
+                style={{
+                  color: '#FFD700',
+                  textShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
+                }}
               >
                 {momentumScore}
               </motion.span>
-              <span className="text-bronze-darker text-xs font-bold">{getMomentumLabel(momentumScore)}</span>
             </div>
+            <p className="text-amber text-sm mt-2 tracking-wider title-font font-semibold">
+              {getMomentumLabel(momentumScore)}
+            </p>
           </div>
 
+          {/* Divider */}
+          <div className="h-24 w-px bg-gradient-to-b from-transparent via-gold to-transparent mx-4"></div>
+
           {/* Energy Score */}
-          <div className="parchment rounded-xl p-3 text-center">
-            <p className="text-bronze-darker text-[10px] uppercase tracking-widest mb-1 font-bold">
+          <div className="text-center flex-1">
+            <p className="script-font text-xl text-gold mb-2">
               Energy Score
             </p>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-3">
               <motion.span
                 key={energyRating}
-                initial={{ scale: 1.2, opacity: 0 }}
+                initial={{ scale: 1.3, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                style={{ color: '#FF8C00' }}
-                className="text-4xl font-bold"
+                className="title-font text-6xl font-black"
+                style={{
+                  color: '#FFD700',
+                  textShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
+                }}
               >
                 {energyRating}
               </motion.span>
-              <span className="text-bronze-darker text-xs font-bold">
-                {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
-              </span>
             </div>
+            <p className="text-amber text-sm mt-2 tracking-wider title-font font-semibold">
+              {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
+            </p>
           </div>
         </div>
       </motion.div>

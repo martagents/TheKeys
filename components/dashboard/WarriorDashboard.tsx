@@ -111,9 +111,9 @@ export default function WarriorDashboard() {
   }))
 
   return (
-    <div className="min-h-screen bg-black p-4 pt-6 pb-40 overflow-y-auto no-scrollbar">
-      {/* Cosmic fire particle background */}
-      <div className="fixed inset-0 fantasy-bg-cosmic" />
+    <div className="min-h-screen p-4 pt-6 pb-40 overflow-y-auto no-scrollbar">
+      {/* Fantasy mystical background */}
+      <div className="fixed inset-0 fantasy-bg" />
 
       {/* Header */}
       <motion.div
@@ -121,10 +121,14 @@ export default function WarriorDashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-6 relative z-10"
       >
-        <h1 className="font-serif text-3xl gold-gradient font-bold tracking-widest mb-2">
+        <h1 className="title-font text-4xl gold-gradient font-black tracking-widest mb-2"
+          style={{
+            textShadow: '0 0 30px rgba(212, 175, 55, 0.5)'
+          }}
+        >
           WARRIOR
         </h1>
-        <p className="text-parchment text-sm font-serif italic">
+        <p className="script-font text-2xl text-parchment">
           Daily 10X Activities Tracker
         </p>
       </motion.div>

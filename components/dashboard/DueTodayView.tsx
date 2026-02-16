@@ -129,14 +129,23 @@ export default function DueTodayView() {
   }
 
   return (
-    <div className="min-h-screen bg-black p-6 pt-16 pb-40">
+    <div className="min-h-screen p-6 pt-16 pb-40 relative">
+      {/* Fantasy mystical background */}
+      <div className="fixed inset-0 fantasy-bg" />
+
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        className="text-center mb-8 relative z-10"
       >
-        <h1 className="font-serif text-4xl gold-gradient mb-2">Due Today</h1>
+        <h1 className="title-font text-4xl gold-gradient font-black mb-2"
+          style={{
+            textShadow: '0 0 30px rgba(212, 175, 55, 0.5)'
+          }}
+        >
+          Due Today
+        </h1>
         <p className="text-steel text-sm tracking-widest uppercase">
           {format(today, 'EEEE, MMMM d')}
         </p>
