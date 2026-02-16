@@ -132,23 +132,98 @@ export default function TheCitadel() {
     if ('vibrate' in navigator) navigator.vibrate(30)
   }
 
-  // Home view (The Citadel) - Dashboard with tasks by pillar
-  return (
-    <div className="h-screen bg-black p-4 pt-6 pb-24 overflow-y-auto no-scrollbar">
-      {/* Radial gradient background for depth - using utility class */}
-      <div className="fixed inset-0 pointer-events-none obsidian-bg-top" />
+  // Calculate momentum score based on task completion
+  const calculateMomentumScore = (): number => {
+    const allTasks = [
+      ...dailyTasks.warrior,
+      ...dailyTasks.sharp,
+      ...dailyTasks.fitness,
+      ...dailyTasks.presence,
+      ...dailyTasks.temple,
+    ]
+    const completed = allTasks.filter(t => t.completed).length
+    const total = allTasks.length
+    return total > 0 ? Math.round((completed / total) * 100) : 0
+  }
 
-      {/* Header - Rising from darkness */}
+  const momentumScore = calculateMomentumScore()
+
+  const getMomentumLabel = (score: number): string => {
+    if (score >= 80) return 'ON FIRE'
+    if (score >= 60) return 'BUILDING'
+    if (score >= 40) return 'STEADY'
+    return 'IGNITING'
+  }
+
+  // Home view (Founder OS) - Dashboard with tasks by pillar
+  return (
+    <div className="h-screen p-4 pt-4 pb-24 overflow-y-auto no-scrollbar" style={{ background: 'linear-gradient(to bottom, #2d1810 0%, #1a0f08 50%, #0d0805 100%)' }}>
+      {/* Fantasy background */}
+      <div className="fixed inset-0 pointer-events-none fantasy-bg-tree" />
+
+      {/* Header - FOUNDER OS */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="text-center mb-4 relative z-10"
+        transition={{ delay: 0.1 }}
+        className="text-center mb-3 relative z-10"
       >
-        <h1 className="font-serif text-3xl gold-gradient mb-1">The Citadel</h1>
-        <p className="text-steel text-xs tracking-widest uppercase">
-          Daily Command Center
-        </p>
+        <h1 className="font-serif text-2xl md:text-3xl bronze-gradient font-bold tracking-widest mb-1">
+          FOUNDER OS
+        </h1>
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold"></div>
+          <span className="text-gold text-xs">◆</span>
+          <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold"></div>
+        </div>
+      </motion.div>
+
+      {/* Momentum & Energy Scores */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.15 }}
+        className="max-w-2xl mx-auto mb-3 relative z-10"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          {/* Momentum Score */}
+          <div className="parchment rounded-xl p-3 text-center">
+            <p className="text-bronze text-[10px] uppercase tracking-widest mb-1">
+              Momentum Score
+            </p>
+            <div className="flex items-center justify-center gap-2">
+              <motion.span
+                key={momentumScore}
+                initial={{ scale: 1.2, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-3xl font-bold text-amber"
+              >
+                {momentumScore}
+              </motion.span>
+              <span className="text-gold text-xs font-bold">{getMomentumLabel(momentumScore)}</span>
+            </div>
+          </div>
+
+          {/* Energy Score */}
+          <div className="parchment rounded-xl p-3 text-center">
+            <p className="text-bronze text-[10px] uppercase tracking-widest mb-1">
+              Energy Score
+            </p>
+            <div className="flex items-center justify-center gap-2">
+              <motion.span
+                key={energyRating}
+                initial={{ scale: 1.2, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-3xl font-bold text-amber"
+              >
+                {energyRating}
+              </motion.span>
+              <span className="text-gold text-xs font-bold">
+                {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
+              </span>
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       {/* New Citadel Sections */}

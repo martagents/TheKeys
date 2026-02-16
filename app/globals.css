@@ -3,16 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
+  --background: #1a0f08;
   --foreground: #f5f5f5;
   --font-playfair: "Playfair Display", serif;
   --font-inter: "Inter", sans-serif;
+
+  /* Fantasy RPG Color Palette */
+  --bronze: #8B7355;
+  --bronze-dark: #6B5438;
+  --bronze-darker: #4A3319;
+  --gold: #D4AF37;
+  --gold-light: #F4D03F;
+  --gold-bright: #FFD700;
+  --amber: #FF8C00;
+  --amber-glow: #FFA500;
+  --parchment: #F4E4C1;
+  --parchment-dark: #D4C4A1;
+  --stone: #5A5A5A;
+  --stone-dark: #3A3A3A;
+  --earth-green: #556B2F;
+  --moss-green: #6B8E23;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter);
+  background-image: linear-gradient(to bottom, #1a0f08 0%, #2d1810 50%, #1a0f08 100%);
 }
 
 @layer utilities {
@@ -24,42 +41,95 @@ body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   }
 
-  /* Radial gradient for depth and atmosphere - "The Obsidian" */
-  .obsidian-bg {
-    background: radial-gradient(circle at center, #0F0F0F 0%, #0A0A0A 60%, #000000 100%);
+  /* Fantasy RPG Background */
+  .fantasy-bg {
+    background: linear-gradient(to bottom, #2d1810 0%, #1a0f08 30%, #0d0805 100%);
   }
 
-  .obsidian-bg-top {
-    background: radial-gradient(circle at center top, #0F0F0F 0%, #0A0A0A 50%, #000000 100%);
+  .fantasy-bg-tree {
+    background:
+      radial-gradient(ellipse at center top, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+      linear-gradient(to bottom, #2d1810 0%, #1a0f08 50%, #0d0805 100%);
   }
 
   .gold-gradient {
-    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Glassmorphism for Dark Luxury */
+  .bronze-gradient {
+    background: linear-gradient(135deg, var(--bronze) 0%, var(--gold) 50%, var(--bronze) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Parchment/Stone UI Elements */
+  .parchment {
+    background: linear-gradient(135deg, rgba(244, 228, 193, 0.15) 0%, rgba(212, 196, 161, 0.1) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(244, 228, 193, 0.1);
+  }
+
+  .stone-panel {
+    background:
+      linear-gradient(135deg, rgba(90, 90, 90, 0.2) 0%, rgba(58, 58, 58, 0.3) 100%),
+      rgba(26, 15, 8, 0.6);
+    border: 2px solid rgba(139, 115, 85, 0.4);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(212, 175, 55, 0.1);
+  }
+
+  .ornate-border {
+    border: 3px solid;
+    border-image: linear-gradient(135deg, var(--bronze-dark), var(--gold), var(--bronze-dark)) 1;
+    position: relative;
+  }
+
+  .ornate-border::before,
+  .ornate-border::after {
+    content: '◆';
+    position: absolute;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .ornate-border::before {
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .ornate-border::after {
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Legacy glass classes kept for compatibility */
   .glass {
-    background: rgba(26, 26, 26, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(26, 15, 8, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
 
   .glass-dark {
-    background: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(142, 142, 147, 0.15);
+    background: rgba(13, 8, 5, 0.8);
+    border: 2px solid rgba(139, 115, 85, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   }
 
   .glass-pillar {
-    background: rgba(15, 15, 15, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(26, 15, 8, 0.7);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(212, 175, 55, 0.2);
   }
 
   /* Touch target minimum for mobile */

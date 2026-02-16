@@ -59,8 +59,16 @@ export default function TheVow({ onComplete }: TheVowProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-      {/* Radial gradient background - the "Obsidian" atmosphere */}
-      <div className="absolute inset-0 obsidian-bg" />
+      {/* Fantasy RPG background with mystical atmosphere */}
+      <div className="absolute inset-0 fantasy-bg-tree" />
+
+      {/* Subtle tree silhouette effect */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `radial-gradient(ellipse at center 20%, transparent 0%, rgba(212, 175, 55, 0.05) 40%, transparent 80%)`,
+        }}
+      />
 
       <AnimatePresence mode="wait">
         {!showText ? (
@@ -169,7 +177,7 @@ export default function TheVow({ onComplete }: TheVowProps) {
             )}
           </motion.div>
         ) : (
-          // "I am not done" - The Vow with letter-spacing animation
+          // "FOUNDER OS" - Epic reveal
           <motion.div
             key="vow"
             initial={{ opacity: 0 }}
@@ -178,20 +186,49 @@ export default function TheVow({ onComplete }: TheVowProps) {
             transition={{ duration: 0.8 }}
             className="text-center relative z-10"
           >
+            {/* THE KEYS */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 1 }}
+              className="mb-4"
+            >
+              <h2 className="font-serif text-2xl md:text-4xl bronze-gradient font-bold tracking-widest mb-2">
+                THE KEYS
+              </h2>
+              <div className="flex items-center justify-center gap-2">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
+                <span className="text-gold text-sm">◆</span>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
+              </div>
+            </motion.div>
+
+            {/* FOUNDER OS */}
             <motion.h1
-              initial={{ letterSpacing: '0.3em', opacity: 0 }}
+              initial={{ letterSpacing: '0.5em', opacity: 0 }}
               animate={{
-                letterSpacing: '0.02em',
+                letterSpacing: '0.15em',
                 opacity: 1,
               }}
               transition={{
+                delay: 0.5,
                 duration: 1.5,
                 ease: 'easeOut',
               }}
-              className="font-serif text-3xl md:text-5xl gold-gradient font-bold px-8 text-center leading-tight"
+              className="font-serif text-4xl md:text-6xl gold-gradient font-bold uppercase mb-6"
+            >
+              FOUNDER OS
+            </motion.h1>
+
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="text-parchment text-sm md:text-base font-serif italic max-w-md mx-auto px-4"
             >
               I am not measured by my input, but by my output.
-            </motion.h1>
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
