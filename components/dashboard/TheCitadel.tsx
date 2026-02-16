@@ -17,6 +17,10 @@ import EnergyRatingDisplay from '../citadel/EnergyRatingDisplay'
 import Daily10XSection from '../citadel/Daily10XSection'
 import NightlyCheckIn from '../citadel/NightlyCheckIn'
 import WeeklyReflection from '../citadel/WeeklyReflection'
+import OrnateCorners from '../decorations/OrnateCorners'
+import TodaysCompass from '../citadel/TodaysCompass'
+import TodaysWin from '../citadel/TodaysWin'
+import BottomMetrics from '../citadel/BottomMetrics'
 
 export type PillarData = {
   id: string
@@ -157,7 +161,12 @@ export default function TheCitadel() {
 
   // Home view (Founder OS) - Dashboard with tasks by pillar
   return (
-    <div className="h-screen p-4 pt-4 pb-24 overflow-y-auto no-scrollbar fantasy-bg-tree">
+    <div className="h-screen p-4 pt-6 pb-24 overflow-y-auto no-scrollbar bg-black relative">
+      {/* Cosmic fire particle background */}
+      <div className="fixed inset-0 fantasy-bg-cosmic" />
+
+      {/* Ornate corner decorations */}
+      <OrnateCorners />
 
       {/* Header - FOUNDER OS */}
       <motion.div
@@ -236,6 +245,15 @@ export default function TheCitadel() {
 
         {/* Daily 10X */}
         <Daily10XSection />
+
+        {/* Today's Compass */}
+        <TodaysCompass />
+
+        {/* Today's Win */}
+        <TodaysWin />
+
+        {/* Bottom Metrics */}
+        <BottomMetrics />
       </div>
 
       {/* Warrior - Full width across top - Rising from bottom */}

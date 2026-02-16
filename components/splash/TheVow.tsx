@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import OrnateCorners from '../decorations/OrnateCorners'
 
 interface TheVowProps {
   onComplete: () => void
@@ -58,17 +59,24 @@ export default function TheVow({ onComplete }: TheVowProps) {
   }, [showText, onComplete])
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-      {/* Fantasy RPG background with mystical atmosphere */}
-      <div className="absolute inset-0 fantasy-bg-tree" />
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-black">
+      {/* Cosmic fire particle background */}
+      <div className="absolute inset-0 fantasy-bg-cosmic" />
 
-      {/* Subtle tree silhouette effect */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `radial-gradient(ellipse at center 20%, transparent 0%, rgba(212, 175, 55, 0.05) 40%, transparent 80%)`,
-        }}
-      />
+      {/* Ornate corner decorations */}
+      <OrnateCorners />
+
+      {/* Footer tagline */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+      >
+        <p className="text-gold font-serif text-xs tracking-[0.3em] uppercase">
+          Building Your Next Life
+        </p>
+      </motion.div>
 
       <AnimatePresence mode="wait">
         {!showText ? (
@@ -163,17 +171,28 @@ export default function TheVow({ onComplete }: TheVowProps) {
               </svg>
             </motion.div>
 
-            {/* Instruction text */}
+            {/* "HOLD TO IGNITE" button */}
             {progress === 0 && (
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 1 }}
-                className="absolute -bottom-16 left-1/2 -translate-x-1/2 text-steel text-sm tracking-widest uppercase whitespace-nowrap"
+                className="absolute -bottom-20 left-1/2 -translate-x-1/2"
               >
-                Hold to ignite
-              </motion.p>
+                <div
+                  className="px-6 py-2 rounded-full"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%)',
+                    border: '2px solid rgba(212, 175, 55, 0.5)',
+                    boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
+                  }}
+                >
+                  <p className="text-gold text-sm font-serif font-bold tracking-widest uppercase">
+                    Hold to Ignite
+                  </p>
+                </div>
+              </motion.div>
             )}
           </motion.div>
         ) : (
