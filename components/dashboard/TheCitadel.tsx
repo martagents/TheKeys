@@ -12,15 +12,14 @@ import CalendarView from '../calendar/CalendarView'
 import StreakView from './StreakView'
 import AnalyticsView from './AnalyticsView'
 import SovereignMagicianView from '../sovereign/SovereignMagicianView'
+import WarriorDashboard from './WarriorDashboard'
 import FaithStatementSection from '../citadel/FaithStatementSection'
 import EnergyRatingDisplay from '../citadel/EnergyRatingDisplay'
-import Daily10XSection from '../citadel/Daily10XSection'
 import NightlyCheckIn from '../citadel/NightlyCheckIn'
 import WeeklyReflection from '../citadel/WeeklyReflection'
 import OrnateCorners from '../decorations/OrnateCorners'
 import TodaysCompass from '../citadel/TodaysCompass'
 import TodaysWin from '../citadel/TodaysWin'
-import BottomMetrics from '../citadel/BottomMetrics'
 
 export type PillarData = {
   id: string
@@ -29,7 +28,7 @@ export type PillarData = {
   color: string
 }
 
-type NavView = 'home' | 'today' | 'calendar' | 'streaks' | 'analytics' | 'sovereign'
+type NavView = 'home' | 'today' | 'calendar' | 'warrior' | 'streaks' | 'sovereign'
 
 export default function TheCitadel() {
   const [selectedPillar, setSelectedPillar] = useState<string | null>(null)
@@ -99,6 +98,15 @@ export default function TheCitadel() {
     )
   }
 
+  if (currentView === 'warrior') {
+    return (
+      <>
+        <WarriorDashboard />
+        <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
+      </>
+    )
+  }
+
   if (currentView === 'analytics') {
     return (
       <>
@@ -161,7 +169,7 @@ export default function TheCitadel() {
 
   // Home view (Founder OS) - Dashboard with tasks by pillar
   return (
-    <div className="h-screen p-4 pt-6 pb-24 overflow-y-auto no-scrollbar bg-black relative">
+    <div className="h-screen p-4 pt-6 pb-40 overflow-y-auto no-scrollbar bg-black relative">
       {/* Cosmic fire particle background */}
       <div className="fixed inset-0 fantasy-bg-cosmic" />
 
@@ -183,6 +191,14 @@ export default function TheCitadel() {
           <span className="text-gold text-xs">◆</span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold"></div>
         </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-parchment text-sm font-serif italic max-w-md mx-auto px-4"
+        >
+          I am not measured by my input, but by my output.
+        </motion.p>
       </motion.div>
 
       {/* Momentum & Energy Scores */}
@@ -241,19 +257,13 @@ export default function TheCitadel() {
         <FaithStatementSection />
 
         {/* Energy Rating */}
-        <EnergyRatingDisplay rating={energyRating} />
-
-        {/* Daily 10X */}
-        <Daily10XSection />
+        <EnergyRatingDisplay rating={energyRating} onRatingChange={setEnergyRating} />
 
         {/* Today's Compass */}
         <TodaysCompass />
 
         {/* Today's Win */}
         <TodaysWin />
-
-        {/* Bottom Metrics */}
-        <BottomMetrics />
       </div>
 
       {/* Warrior - Full width across top - Rising from bottom */}
@@ -493,6 +503,7 @@ function BottomNav({
     { id: 'home', icon: '🏛️', label: 'Home' },
     { id: 'today', icon: '📋', label: 'Today' },
     { id: 'calendar', icon: '📅', label: 'Calendar' },
+    { id: 'warrior', icon: '⚔️', label: 'Warrior' },
     { id: 'streaks', icon: '🔥', label: 'Streaks' },
     { id: 'sovereign', icon: '👑', label: 'Sovereign' },
   ]

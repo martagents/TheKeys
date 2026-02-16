@@ -16,8 +16,8 @@ export default function TodaysWin() {
       {/* Title */}
       <div className="flex items-center justify-center gap-3 mb-3">
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
-        <h2 className="script-font text-3xl text-gold">
-          Today&apos;s Win
+        <h2 className="font-serif text-3xl text-gold font-bold tracking-widest">
+          TODAY&apos;S WIN
         </h2>
         <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
       </div>

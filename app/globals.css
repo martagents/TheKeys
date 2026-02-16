@@ -169,6 +169,26 @@ body {
       inset 0 1px 0 rgba(212, 175, 55, 0.25);
   }
 
+  /* Epic icon styling */
+  .epic-icon {
+    filter: drop-shadow(0 0 8px currentColor);
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .epic-icon-glow {
+    position: relative;
+  }
+
+  .epic-icon-glow::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: radial-gradient(circle, currentColor 0%, transparent 70%);
+    opacity: 0.3;
+    z-index: -1;
+  }
+
   /* Touch target minimum for mobile */
   .touch-target {
     min-height: 44px;
