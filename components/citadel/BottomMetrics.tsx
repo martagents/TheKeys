@@ -12,10 +12,10 @@ interface Metric {
 
 export default function BottomMetrics() {
   const metrics: Metric[] = [
-    { id: '1', label: 'Sleep', value: '6.5 hrs', icon: '🌙', completed: true },
-    { id: '2', label: 'Nutrition', value: 'On Track', icon: '🍎', completed: true },
-    { id: '3', label: 'Training', value: 'Complete', icon: '💪', completed: true },
-    { id: '4', label: 'Mindset', value: 'Low Stress', icon: '🧘', completed: true },
+    { id: '1', label: 'Sleep', value: '6.5 hrs', icon: '☾', completed: true },
+    { id: '2', label: 'Nutrition', value: 'On Track', icon: '◈', completed: true },
+    { id: '3', label: 'Training', value: 'Complete', icon: '◆', completed: true },
+    { id: '4', label: 'Mindset', value: 'Low Stress', icon: '◉', completed: true },
   ]
 
   return (
@@ -36,7 +36,7 @@ export default function BottomMetrics() {
             className="bordered-box rounded-xl p-4 flex flex-col items-center gap-2"
           >
             {/* Icon */}
-            <div className="text-4xl">{metric.icon}</div>
+            <div className="text-5xl silver-icon silver-glow">{metric.icon}</div>
 
             {/* Label and Value */}
             <div className="text-center">

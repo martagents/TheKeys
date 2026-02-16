@@ -221,7 +221,7 @@ export default function TheCitadel() {
                 >
                   {momentumScore}
                 </motion.span>
-                <span className="text-gold text-xl">✨</span>
+                <span className="text-xl silver-icon silver-glow">◆</span>
               </div>
               <p className="text-white/70 text-xs tracking-wider title-font">
                 {getMomentumLabel(momentumScore)}
@@ -245,7 +245,7 @@ export default function TheCitadel() {
                 >
                   {energyRating}
                 </motion.span>
-                <span className="text-gold text-xl">✨</span>
+                <span className="text-xl silver-icon silver-glow">◇</span>
               </div>
               <p className="text-white/70 text-xs tracking-wider title-font">
                 {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
@@ -298,8 +298,8 @@ export default function TheCitadel() {
           }}
         >
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xl font-semibold text-orange-400 flex items-center gap-2">
-              <span>⚔️</span>
+            <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+              <span className="silver-icon silver-glow text-2xl">◇</span>
               Warrior
             </h2>
             <button
@@ -345,7 +345,7 @@ export default function TheCitadel() {
         {/* Sharp */}
         <PillarCard
           title="Sharp"
-          icon="🧠"
+          icon="◈"
           color="#60A5FA"
           tasks={dailyTasks.sharp}
           onToggle={(id) => toggleTask('sharp', id)}
@@ -356,7 +356,7 @@ export default function TheCitadel() {
         {/* Fitness */}
         <PillarCard
           title="Fitness"
-          icon="💪"
+          icon="◆"
           color="#34D399"
           tasks={dailyTasks.fitness}
           onToggle={(id) => toggleTask('fitness', id)}
@@ -367,7 +367,7 @@ export default function TheCitadel() {
         {/* Presence */}
         <PillarCard
           title="Presence"
-          icon="🙏"
+          icon="◉"
           color="#A78BFA"
           tasks={dailyTasks.presence}
           onToggle={(id) => toggleTask('presence', id)}
@@ -378,7 +378,7 @@ export default function TheCitadel() {
         {/* Temple */}
         <PillarCard
           title="Temple"
-          icon="✨"
+          icon="◇"
           color="#F472B6"
           tasks={dailyTasks.temple}
           onToggle={(id) => toggleTask('temple', id)}
@@ -460,7 +460,7 @@ function PillarCard({
     >
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-          <span>{icon}</span>
+          <span className="silver-icon silver-glow text-xl">{icon}</span>
           {title}
         </h2>
         <button
@@ -520,12 +520,12 @@ function BottomNav({
   setCurrentView: (view: NavView) => void
 }) {
   const navItems: Array<{ id: NavView; icon: string; label: string }> = [
-    { id: 'home', icon: '🏛️', label: 'Home' },
-    { id: 'today', icon: '📋', label: 'Today' },
-    { id: 'calendar', icon: '📅', label: 'Calendar' },
-    { id: 'warrior', icon: '⚔️', label: 'Warrior' },
-    { id: 'streaks', icon: '🔥', label: 'Streaks' },
-    { id: 'sovereign', icon: '👑', label: 'Sovereign' },
+    { id: 'home', icon: '◆', label: 'Home' },
+    { id: 'today', icon: '◈', label: 'Today' },
+    { id: 'calendar', icon: '◉', label: 'Calendar' },
+    { id: 'warrior', icon: '◇', label: 'Warrior' },
+    { id: 'streaks', icon: '◊', label: 'Streaks' },
+    { id: 'sovereign', icon: '◎', label: 'Sovereign' },
   ]
 
   return (
@@ -550,14 +550,14 @@ function BottomNav({
           >
             <div
               className={`text-2xl transition-all ${
-                currentView === item.id ? 'scale-110' : 'opacity-60'
+                currentView === item.id ? 'scale-110 silver-icon silver-glow' : 'opacity-60 silver-icon'
               }`}
             >
               {item.icon}
             </div>
             <span
               className={`text-xs ${
-                currentView === item.id ? 'text-gold font-semibold' : 'text-steel'
+                currentView === item.id ? 'text-white font-semibold' : 'text-white/50'
               }`}
             >
               {item.label}

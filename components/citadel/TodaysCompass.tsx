@@ -13,10 +13,10 @@ interface CompassItem {
 
 export default function TodaysCompass() {
   const [items, setItems] = useState<CompassItem[]>([
-    { id: '1', category: 'Business', task: 'Review Q1 metrics', icon: '🚀', completed: false },
-    { id: '2', category: 'Health', task: 'Morning workout', icon: '❤️', completed: false },
-    { id: '3', category: 'Family', task: 'Evening call with parents', icon: '👥', completed: false },
-    { id: '4', category: 'Growth', task: 'Read 30 pages', icon: '📖', completed: false },
+    { id: '1', category: 'Business', task: 'Review Q1 metrics', icon: '◆', completed: false },
+    { id: '2', category: 'Health', task: 'Morning workout', icon: '◇', completed: false },
+    { id: '3', category: 'Family', task: 'Evening call with parents', icon: '◈', completed: false },
+    { id: '4', category: 'Growth', task: 'Read 30 pages', icon: '◉', completed: false },
   ])
 
   const toggleItem = (id: string) => {
@@ -59,13 +59,8 @@ export default function TodaysCompass() {
             className="flex items-center gap-4"
           >
             {/* Icon Circle */}
-            <div
-              className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 bg-white/5"
-              style={{
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-            >
-              <span className="text-2xl">{item.icon}</span>
+            <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 silver-icon-circle">
+              <span className="text-2xl silver-icon silver-glow">{item.icon}</span>
             </div>
 
             {/* Category and Task */}

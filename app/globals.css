@@ -246,6 +246,44 @@ body {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.55);
   }
 
+  /* Silver Gleaming Icon Styling */
+  .silver-icon {
+    color: #e8e8e8;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))
+            drop-shadow(0 0 12px rgba(200, 200, 220, 0.4));
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(200, 200, 220, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .silver-icon-circle {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(200, 200, 220, 0.1) 50%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .silver-glow {
+    animation: silver-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes silver-pulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))
+              drop-shadow(0 0 12px rgba(200, 200, 220, 0.4));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8))
+              drop-shadow(0 0 20px rgba(200, 200, 220, 0.6));
+    }
+  }
+
   /* Epic icon styling */
   .epic-icon {
     filter: drop-shadow(0 0 8px currentColor);
