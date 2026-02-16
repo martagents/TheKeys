@@ -9,7 +9,7 @@ export default function VitalityCore() {
   const [proteinMet, setProteinMet] = useState(false)
 
   const bothMet = caloriesMet && proteinMet
-  const orbColor = bothMet ? '#34D399' : caloriesMet || proteinMet ? '#F59E0B' : '#EF4444'
+  const orbColor = '#E8E8E8' // Silver/white color for all states
 
   return (
     <div className="fixed top-8 left-1/2 -translate-x-1/2 z-20">
@@ -72,9 +72,7 @@ export default function VitalityCore() {
           <div className="flex gap-2">
             {/* Calorie indicator */}
             <motion.div
-              className={`w-2 h-2 rounded-full ${
-                caloriesMet ? 'bg-green-400' : 'bg-red-400'
-              }`}
+              className="w-2 h-2 rounded-full bg-white"
               animate={{
                 opacity: [0.5, 1, 0.5],
               }}
@@ -87,9 +85,7 @@ export default function VitalityCore() {
 
             {/* Protein indicator */}
             <motion.div
-              className={`w-2 h-2 rounded-full ${
-                proteinMet ? 'bg-green-400' : 'bg-red-400'
-              }`}
+              className="w-2 h-2 rounded-full bg-white"
               animate={{
                 opacity: [0.5, 1, 0.5],
               }}
@@ -114,11 +110,11 @@ export default function VitalityCore() {
         >
           <div className="flex gap-4 text-xs">
             <div className="flex items-center gap-1">
-              <div className={`w-2 h-2 rounded-full ${caloriesMet ? 'bg-green-400' : 'bg-red-400'}`} />
+              <div className="w-2 h-2 rounded-full bg-white" />
               <span className="text-steel">1400 cal</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className={`w-2 h-2 rounded-full ${proteinMet ? 'bg-green-400' : 'bg-red-400'}`} />
+              <div className="w-2 h-2 rounded-full bg-white" />
               <span className="text-steel">100g protein</span>
             </div>
           </div>

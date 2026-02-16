@@ -38,11 +38,11 @@ export default function TheCitadel() {
 
   // Mock data - will be replaced with Supabase data
   const pillars: PillarData[] = [
-    { id: 'sharp', name: 'Sharp', compliance: 0, color: '#60A5FA' },
-    { id: 'fitness', name: 'Fitness', compliance: 0, color: '#34D399' },
-    { id: 'presence', name: 'Presence', compliance: 0, color: '#A78BFA' },
-    { id: 'temple', name: 'Temple', compliance: 0, color: '#F472B6' },
-    { id: 'warrior', name: 'Warrior', compliance: 0, color: '#FB923C' },
+    { id: 'sharp', name: 'Sharp', compliance: 0, color: '#E8E8E8' },
+    { id: 'fitness', name: 'Fitness', compliance: 0, color: '#E8E8E8' },
+    { id: 'presence', name: 'Presence', compliance: 0, color: '#E8E8E8' },
+    { id: 'temple', name: 'Temple', compliance: 0, color: '#E8E8E8' },
+    { id: 'warrior', name: 'Warrior', compliance: 0, color: '#E8E8E8' },
   ]
 
   // Mock daily tasks
@@ -292,9 +292,9 @@ export default function TheCitadel() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, type: 'spring', damping: 20, stiffness: 100 }}
-          className="glass-pillar rounded-2xl p-4 border-2 border-orange-400/30"
+          className="glass-pillar rounded-2xl p-4 border-2 border-white/30"
           style={{
-            boxShadow: '0 8px 32px rgba(251, 146, 60, 0.1)',
+            boxShadow: '0 8px 32px rgba(255, 255, 255, 0.1)',
           }}
         >
           <div className="flex items-center justify-between mb-3">
@@ -321,11 +321,11 @@ export default function TheCitadel() {
                 <div
                   className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
                     task.completed
-                      ? 'bg-orange-400 border-orange-400'
+                      ? 'bg-white border-white'
                       : 'border-steel/50'
                   }`}
                 >
-                  {task.completed && <span className="text-white text-xs">✓</span>}
+                  {task.completed && <span className="text-black text-xs">✓</span>}
                 </div>
                 <span
                   className={`text-left flex-1 ${
@@ -346,7 +346,7 @@ export default function TheCitadel() {
         <PillarCard
           title="Sharp"
           icon="◈"
-          color="#60A5FA"
+          color="#E8E8E8"
           tasks={dailyTasks.sharp}
           onToggle={(id) => toggleTask('sharp', id)}
           onViewAll={() => setSelectedPillar('sharp')}
@@ -357,7 +357,7 @@ export default function TheCitadel() {
         <PillarCard
           title="Fitness"
           icon="◆"
-          color="#34D399"
+          color="#E8E8E8"
           tasks={dailyTasks.fitness}
           onToggle={(id) => toggleTask('fitness', id)}
           onViewAll={() => setSelectedPillar('fitness')}
@@ -368,7 +368,7 @@ export default function TheCitadel() {
         <PillarCard
           title="Presence"
           icon="◉"
-          color="#A78BFA"
+          color="#E8E8E8"
           tasks={dailyTasks.presence}
           onToggle={(id) => toggleTask('presence', id)}
           onViewAll={() => setSelectedPillar('presence')}
@@ -379,7 +379,7 @@ export default function TheCitadel() {
         <PillarCard
           title="Temple"
           icon="◇"
-          color="#F472B6"
+          color="#E8E8E8"
           tasks={dailyTasks.temple}
           onToggle={(id) => toggleTask('temple', id)}
           onViewAll={() => setSelectedPillar('temple')}

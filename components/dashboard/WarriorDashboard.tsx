@@ -55,10 +55,10 @@ export default function WarriorDashboard() {
   }
 
   const categoryColors: Record<TenXCategory, string> = {
-    'Business Impact': '#3B82F6',
-    'Personal Capacity': '#8B5CF6',
-    'Physical Vitality & Strength': '#10B981',
-    'Mental Peace & Sharpness': '#F59E0B',
+    'Business Impact': '#E8E8E8',
+    'Personal Capacity': '#E8E8E8',
+    'Physical Vitality & Strength': '#E8E8E8',
+    'Mental Peace & Sharpness': '#E8E8E8',
   }
 
   const handleAddActivity = () => {
@@ -350,7 +350,7 @@ export default function WarriorDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <h2 className="text-green-500 font-semibold mb-3 flex items-center gap-2">
+            <h2 className="text-white font-semibold mb-3 flex items-center gap-2">
               <span>✓</span>
               Completed ({completedActivities.length})
             </h2>
@@ -409,11 +409,11 @@ function ActivityCard({
           onClick={() => onToggle(activity.id)}
           className={`w-6 h-6 mt-1 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all ${
             activity.completed
-              ? 'bg-green-500/20 border-green-500'
+              ? 'bg-white/20 border-white'
               : 'border-gold/40 hover:border-gold'
           }`}
         >
-          {activity.completed && <span className="text-green-500 text-sm">✓</span>}
+          {activity.completed && <span className="text-white text-sm">✓</span>}
         </button>
 
         <div className="flex-1 min-w-0">
@@ -445,7 +445,7 @@ function ActivityCard({
           <div className="flex items-center gap-3 text-xs text-steel">
             <span>📅 {format(new Date(activity.scheduledDate), 'MMM dd, yyyy')}</span>
             {activity.completed && activity.completedDate && (
-              <span className="text-green-500">✓ {format(new Date(activity.completedDate), 'MMM dd, yyyy')}</span>
+              <span className="text-white">✓ {format(new Date(activity.completedDate), 'MMM dd, yyyy')}</span>
             )}
           </div>
         </div>

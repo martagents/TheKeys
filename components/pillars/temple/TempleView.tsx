@@ -163,9 +163,7 @@ export default function TempleView() {
   }
 
   const getDecayColor = (decay: number) => {
-    if (decay > 0.6) return '#34D399' // Green
-    if (decay > 0.3) return '#F59E0B' // Orange
-    return '#EF4444' // Red
+    return '#E8E8E8' // Silver/white for all states
   }
 
   const getDecayStatus = (decay: number) => {
@@ -230,7 +228,7 @@ export default function TempleView() {
               cy="50%"
               r="70"
               fill="none"
-              stroke="#F472B6"
+              stroke="#E8E8E8"
               strokeWidth="10"
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
@@ -239,7 +237,7 @@ export default function TempleView() {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-4xl font-bold text-pink-400">{progress}%</span>
+            <span className="text-4xl font-bold text-white">{progress}%</span>
           </div>
         </div>
 
@@ -254,7 +252,7 @@ export default function TempleView() {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ delay: index * 0.05 }}
                 className={`glass-dark rounded-xl p-4 flex items-center justify-between ${
-                  step.completed ? 'bg-pink-400/10' : ''
+                  step.completed ? 'bg-white/10' : ''
                 }`}
               >
                 <button
@@ -264,7 +262,7 @@ export default function TempleView() {
                   <div
                     className={`w-6 h-6 rounded border-2 flex items-center justify-center ${
                       step.completed
-                        ? 'bg-pink-400 border-pink-400'
+                        ? 'bg-white border-white'
                         : 'border-steel/50'
                     }`}
                   >
@@ -282,7 +280,7 @@ export default function TempleView() {
                 {editingRoutine && (
                   <button
                     onClick={() => removeSkincareStep(showSkincareDetail, step.id)}
-                    className="text-red-400 text-xs ml-2 hover:text-red-300"
+                    className="text-white text-xs ml-2 hover:text-white"
                   >
                     Remove
                   </button>
@@ -353,7 +351,7 @@ export default function TempleView() {
         {/* Skincare Routines */}
         <div className="glass-dark rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-            <span className="text-pink-400">✨</span>
+            <span className="text-white">✨</span>
             Skincare Routines
           </h3>
           <p className="text-steel text-xs mb-4">
@@ -375,7 +373,7 @@ export default function TempleView() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-pink-400 font-bold">
+                  <p className="text-white font-bold">
                     {getSkincareProgress('morning')}%
                   </p>
                   <p className="text-steel text-xs">→</p>
@@ -397,7 +395,7 @@ export default function TempleView() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-pink-400 font-bold">
+                  <p className="text-white font-bold">
                     {getSkincareProgress('night')}%
                   </p>
                   <p className="text-steel text-xs">→</p>

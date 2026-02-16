@@ -67,7 +67,7 @@ export default function PresenceView() {
             className="w-full flex items-center justify-between mb-4"
           >
             <h3 className="text-white font-semibold flex items-center gap-2">
-              <span className="text-purple-400">✨</span>
+              <span className="text-white">✨</span>
               Faith Statement
             </h3>
             <span className="text-steel text-lg">
@@ -83,7 +83,7 @@ export default function PresenceView() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-luxury-charcoal/50 rounded-xl p-5 border border-purple-400/20">
+                <div className="bg-luxury-charcoal/50 rounded-xl p-5 border border-white/20">
                   <p className="text-white/90 leading-relaxed text-sm font-serif italic mb-4">
                     &ldquo;By the first day of January, 2027, I will have in my possession{' '}
                     <span className="text-gold font-bold">10m SGD</span> in liquid assets
@@ -116,7 +116,7 @@ export default function PresenceView() {
         {/* Energy Dashboard */}
         <div>
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-purple-400">⚡</span>
+            <span className="text-white">⚡</span>
             Energy Dashboard
           </h3>
           <EnergyDashboard />
@@ -161,7 +161,7 @@ export default function PresenceView() {
                   exit={{ opacity: 0, x: 20 }}
                   className={`p-4 rounded-xl border transition-all ${
                     spark.purchased
-                      ? 'bg-green-400/10 border-green-400/30'
+                      ? 'bg-white/10 border-white/30'
                       : 'bg-luxury-charcoal border-steel/30'
                   }`}
                 >
@@ -173,7 +173,7 @@ export default function PresenceView() {
                       <div
                         className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
                           spark.purchased
-                            ? 'bg-green-400 border-green-400'
+                            ? 'bg-white border-white'
                             : 'border-steel/50'
                         }`}
                       >
@@ -193,7 +193,7 @@ export default function PresenceView() {
                     </button>
 
                     {spark.purchased && (
-                      <button className="text-xs text-gold hover:text-yellow-300 transition-colors">
+                      <button className="text-xs text-gold hover:text-white transition-colors">
                         📸 Enshrine
                       </button>
                     )}

@@ -71,13 +71,13 @@ export default function SharpView() {
               transition={{ delay: index * 0.1 }}
               onClick={() => toggleSubtask(task.id)}
               className={`w-full glass-dark rounded-xl p-5 flex items-center gap-4 transition-all touch-target ${
-                task.completed ? 'bg-blue-400/10' : ''
+                task.completed ? 'bg-white/10' : ''
               }`}
             >
               <div
                 className={`w-7 h-7 rounded border-2 flex items-center justify-center ${
                   task.completed
-                    ? 'bg-blue-400 border-blue-400'
+                    ? 'bg-white border-white'
                     : 'border-steel/50'
                 }`}
               >

@@ -82,13 +82,13 @@ export default function FitnessView() {
               transition={{ delay: index * 0.1 }}
               onClick={() => toggleWorkoutSubtask(task.id)}
               className={`w-full glass-dark rounded-xl p-5 flex items-center gap-4 transition-all touch-target ${
-                task.completed ? 'bg-green-400/10' : ''
+                task.completed ? 'bg-white/10' : ''
               }`}
             >
               <div
                 className={`w-7 h-7 rounded border-2 flex items-center justify-center ${
                   task.completed
-                    ? 'bg-green-400 border-green-400'
+                    ? 'bg-white border-white'
                     : 'border-steel/50'
                 }`}
               >
@@ -135,14 +135,14 @@ export default function FitnessView() {
         {/* Workout Completion */}
         <div className="glass-dark rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-green-400">💪</span>
+            <span className="text-white">💪</span>
             Workout
           </h3>
           <button
             onClick={() => setShowWorkoutDetails(true)}
             className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
               workoutCompleted
-                ? 'bg-green-400/10 border-green-400'
+                ? 'bg-white/10 border-white'
                 : 'bg-steel/5 border-steel/30'
             }`}
           >
@@ -154,7 +154,7 @@ export default function FitnessView() {
               </span>
               <div className="flex items-center gap-2">
                 {workoutCompleted && (
-                  <div className="w-6 h-6 rounded-full bg-green-400" />
+                  <div className="w-6 h-6 rounded-full bg-white" />
                 )}
                 <span className="text-steel text-xs">→</span>
               </div>
@@ -165,7 +165,7 @@ export default function FitnessView() {
         {/* Nutrition Adherence */}
         <div className="glass-dark rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-green-400">🎯</span>
+            <span className="text-white">🎯</span>
             Nutrition Targets
           </h3>
           <div className="space-y-3">
@@ -176,7 +176,7 @@ export default function FitnessView() {
               }}
               className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
                 caloriesMet
-                  ? 'bg-green-400/10 border-green-400'
+                  ? 'bg-white/10 border-white'
                   : 'bg-steel/5 border-steel/30'
               }`}
             >
@@ -184,7 +184,7 @@ export default function FitnessView() {
                 <span className="text-white">1400 Calories</span>
                 <div
                   className={`w-6 h-6 rounded-full ${
-                    caloriesMet ? 'bg-green-400' : 'bg-steel/30'
+                    caloriesMet ? 'bg-white' : 'bg-steel/30'
                   }`}
                 />
               </div>
@@ -197,7 +197,7 @@ export default function FitnessView() {
               }}
               className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
                 proteinMet
-                  ? 'bg-green-400/10 border-green-400'
+                  ? 'bg-white/10 border-white'
                   : 'bg-steel/5 border-steel/30'
               }`}
             >
@@ -205,7 +205,7 @@ export default function FitnessView() {
                 <span className="text-white">100g Protein</span>
                 <div
                   className={`w-6 h-6 rounded-full ${
-                    proteinMet ? 'bg-green-400' : 'bg-steel/30'
+                    proteinMet ? 'bg-white' : 'bg-steel/30'
                   }`}
                 />
               </div>
@@ -218,7 +218,7 @@ export default function FitnessView() {
               }}
               className={`w-full p-4 rounded-xl border-2 transition-all touch-target ${
                 waterMet
-                  ? 'bg-blue-400/10 border-blue-400'
+                  ? 'bg-white/10 border-white'
                   : 'bg-steel/5 border-steel/30'
               }`}
             >
@@ -226,7 +226,7 @@ export default function FitnessView() {
                 <span className="text-white">2L Water</span>
                 <div
                   className={`w-6 h-6 rounded-full ${
-                    waterMet ? 'bg-blue-400' : 'bg-steel/30'
+                    waterMet ? 'bg-white' : 'bg-steel/30'
                   }`}
                 />
               </div>
@@ -237,7 +237,7 @@ export default function FitnessView() {
         {/* Steps */}
         <div className="glass-dark rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-blue-400">👟</span>
+            <span className="text-white">👟</span>
             Steps
           </h3>
           <input
@@ -251,7 +251,7 @@ export default function FitnessView() {
             <span className="text-steel">Target: 10,000</span>
             <span
               className={`${
-                steps >= 10000 ? 'text-green-400' : 'text-steel'
+                steps >= 10000 ? 'text-white' : 'text-steel'
               }`}
             >
               {steps >= 10000 ? '✓ Goal met' : `${10000 - steps} to go`}
@@ -260,7 +260,7 @@ export default function FitnessView() {
           {/* Progress bar */}
           <div className="mt-2 h-2 bg-steel/20 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-400 to-green-400"
+              className="h-full bg-gradient-to-r from-white/80 to-white"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min((steps / 10000) * 100, 100)}%` }}
               transition={{ duration: 0.5 }}
@@ -271,7 +271,7 @@ export default function FitnessView() {
         {/* Weight Tracking */}
         <div className="glass-dark rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-purple-400">⚖️</span>
+            <span className="text-white">⚖️</span>
             Weight (7-day average)
           </h3>
           <div className="flex gap-2 mb-3">
@@ -297,7 +297,7 @@ export default function FitnessView() {
             </button>
           </div>
           {savedWeight && (
-            <p className="text-green-400 text-sm mb-3">
+            <p className="text-white text-sm mb-3">
               ✓ Saved: {savedWeight} lbs
             </p>
           )}
@@ -320,7 +320,7 @@ export default function FitnessView() {
             {weeklyWeights.map((w, i) => (
               <div
                 key={i}
-                className="flex-1 bg-purple-400/30 rounded-t"
+                className="flex-1 bg-white/30 rounded-t"
                 style={{
                   height: `${((w - Math.min(...weeklyWeights)) / (Math.max(...weeklyWeights) - Math.min(...weeklyWeights))) * 100}%`,
                 }}
