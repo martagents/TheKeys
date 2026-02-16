@@ -157,9 +157,7 @@ export default function TheCitadel() {
 
   // Home view (Founder OS) - Dashboard with tasks by pillar
   return (
-    <div className="h-screen p-4 pt-4 pb-24 overflow-y-auto no-scrollbar" style={{ background: 'linear-gradient(to bottom, #2d1810 0%, #1a0f08 50%, #0d0805 100%)' }}>
-      {/* Fantasy background */}
-      <div className="fixed inset-0 pointer-events-none fantasy-bg-tree" />
+    <div className="h-screen p-4 pt-4 pb-24 overflow-y-auto no-scrollbar fantasy-bg-tree">
 
       {/* Header - FOUNDER OS */}
       <motion.div
@@ -188,7 +186,7 @@ export default function TheCitadel() {
         <div className="grid grid-cols-2 gap-3">
           {/* Momentum Score */}
           <div className="parchment rounded-xl p-3 text-center">
-            <p className="text-bronze text-[10px] uppercase tracking-widest mb-1">
+            <p className="text-bronze-darker text-[10px] uppercase tracking-widest mb-1 font-bold">
               Momentum Score
             </p>
             <div className="flex items-center justify-center gap-2">
@@ -196,17 +194,18 @@ export default function TheCitadel() {
                 key={momentumScore}
                 initial={{ scale: 1.2, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-3xl font-bold text-amber"
+                style={{ color: '#FF8C00' }}
+                className="text-4xl font-bold"
               >
                 {momentumScore}
               </motion.span>
-              <span className="text-gold text-xs font-bold">{getMomentumLabel(momentumScore)}</span>
+              <span className="text-bronze-darker text-xs font-bold">{getMomentumLabel(momentumScore)}</span>
             </div>
           </div>
 
           {/* Energy Score */}
           <div className="parchment rounded-xl p-3 text-center">
-            <p className="text-bronze text-[10px] uppercase tracking-widest mb-1">
+            <p className="text-bronze-darker text-[10px] uppercase tracking-widest mb-1 font-bold">
               Energy Score
             </p>
             <div className="flex items-center justify-center gap-2">
@@ -214,11 +213,12 @@ export default function TheCitadel() {
                 key={energyRating}
                 initial={{ scale: 1.2, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-3xl font-bold text-amber"
+                style={{ color: '#FF8C00' }}
+                className="text-4xl font-bold"
               >
                 {energyRating}
               </motion.span>
-              <span className="text-gold text-xs font-bold">
+              <span className="text-bronze-darker text-xs font-bold">
                 {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
               </span>
             </div>
