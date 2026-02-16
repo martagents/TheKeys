@@ -19,6 +19,8 @@ import WeeklyReflection from '../citadel/WeeklyReflection'
 import OrnateCorners from '../decorations/OrnateCorners'
 import TodaysCompass from '../citadel/TodaysCompass'
 import TodaysWin from '../citadel/TodaysWin'
+import MoonOrb from '../citadel/MoonOrb'
+import BottomMetrics from '../citadel/BottomMetrics'
 
 export type PillarData = {
   id: string
@@ -171,49 +173,30 @@ export default function TheCitadel() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="text-center mb-6 relative z-10"
+        className="text-center mb-8 relative z-10"
       >
-        {/* Ornate decorative flourish */}
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold to-gold"></div>
-          <div className="ornate-diamond"></div>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent via-gold to-gold"></div>
-        </div>
-
         {/* THE KEYS */}
-        <p className="text-gold text-sm tracking-[0.3em] mb-2 title-font font-medium">
+        <p className="text-white/60 text-xs tracking-[0.3em] mb-3 title-font font-medium">
           THE KEYS
         </p>
 
         {/* FOUNDER OS */}
-        <h1 className="title-font text-4xl md:text-5xl gold-gradient font-black tracking-widest mb-3"
-          style={{
-            textShadow: '0 0 30px rgba(212, 175, 55, 0.5), 0 0 10px rgba(255, 215, 0, 0.3)'
-          }}
-        >
+        <h1 className="title-font text-4xl md:text-5xl text-white font-black tracking-widest mb-4">
           FOUNDER OS
         </h1>
 
-        {/* Divider with diamond */}
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
-          <span className="text-gold text-xs">◆</span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
+        {/* Ornate line with diamond */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-px w-24 bg-white/20"></div>
+          <div className="ornate-diamond"></div>
+          <div className="h-px w-24 bg-white/20"></div>
         </div>
-
-        {/* Quote */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="script-font text-2xl text-parchment max-w-md mx-auto px-4"
-          style={{
-            textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)'
-          }}
-        >
-          I am not measured by my input, but by my output.
-        </motion.p>
       </motion.div>
+
+      {/* Moon Orb - Centerpiece */}
+      <div className="max-w-2xl mx-auto mb-6">
+        <MoonOrb />
+      </div>
 
       {/* Momentum & Energy Scores */}
       <motion.div
@@ -222,56 +205,53 @@ export default function TheCitadel() {
         transition={{ delay: 0.4 }}
         className="max-w-2xl mx-auto mb-6 relative z-10"
       >
-        <div className="glass rounded-2xl p-4 flex items-center justify-around">
+        <div className="grid grid-cols-2 gap-4">
           {/* Momentum Score */}
-          <div className="text-center flex-1">
-            <p className="script-font text-xl text-gold mb-2">
-              Momentum Score
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <motion.span
-                key={momentumScore}
-                initial={{ scale: 1.3, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="title-font text-6xl font-black"
-                style={{
-                  color: '#FFD700',
-                  textShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
-                }}
-              >
-                {momentumScore}
-              </motion.span>
+          <div className="bordered-box rounded-xl p-4 relative">
+            <div className="text-center">
+              <p className="text-white text-xs font-medium mb-3 tracking-wider">
+                Momentum Score
+              </p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <motion.span
+                  key={momentumScore}
+                  initial={{ scale: 1.3, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="title-font text-5xl font-black text-white"
+                >
+                  {momentumScore}
+                </motion.span>
+                <span className="text-gold text-xl">✨</span>
+              </div>
+              <p className="text-white/70 text-xs tracking-wider title-font">
+                {getMomentumLabel(momentumScore)}
+              </p>
             </div>
-            <p className="text-amber text-sm mt-2 tracking-wider title-font font-semibold">
-              {getMomentumLabel(momentumScore)}
-            </p>
+            <div className="box-pointer"></div>
           </div>
 
-          {/* Divider */}
-          <div className="h-24 w-px bg-gradient-to-b from-transparent via-gold to-transparent mx-4"></div>
-
           {/* Energy Score */}
-          <div className="text-center flex-1">
-            <p className="script-font text-xl text-gold mb-2">
-              Energy Score
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <motion.span
-                key={energyRating}
-                initial={{ scale: 1.3, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="title-font text-6xl font-black"
-                style={{
-                  color: '#FFD700',
-                  textShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
-                }}
-              >
-                {energyRating}
-              </motion.span>
+          <div className="bordered-box rounded-xl p-4 relative">
+            <div className="text-center">
+              <p className="text-white text-xs font-medium mb-3 tracking-wider">
+                Energy Score
+              </p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <motion.span
+                  key={energyRating}
+                  initial={{ scale: 1.3, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="title-font text-5xl font-black text-white"
+                >
+                  {energyRating}
+                </motion.span>
+                <span className="text-gold text-xl">✨</span>
+              </div>
+              <p className="text-white/70 text-xs tracking-wider title-font">
+                {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
+              </p>
             </div>
-            <p className="text-amber text-sm mt-2 tracking-wider title-font font-semibold">
-              {energyRating >= 80 ? 'PEAK' : energyRating >= 60 ? 'FOCUSED' : 'RECOVERING'}
-            </p>
+            <div className="box-pointer"></div>
           </div>
         </div>
       </motion.div>
@@ -289,7 +269,22 @@ export default function TheCitadel() {
 
         {/* Today's Win */}
         <TodaysWin />
+
+        {/* Bottom Metrics */}
+        <BottomMetrics />
       </div>
+
+      {/* Footer */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="max-w-2xl mx-auto text-center mt-8 mb-4 relative z-10"
+      >
+        <p className="text-white/40 text-xs tracking-[0.2em] title-font">
+          BUILDING YOUR NEXT LIFE
+        </p>
+      </motion.div>
 
       {/* Warrior - Full width across top - Rising from bottom */}
       <div className="max-w-2xl mx-auto mb-3 relative z-10">

@@ -12,10 +12,10 @@ interface Metric {
 
 export default function BottomMetrics() {
   const metrics: Metric[] = [
-    { id: '1', label: 'Sleep', value: '8h', icon: '🌙', completed: true },
-    { id: '2', label: 'Training', value: 'Done', icon: '🏋️', completed: true },
-    { id: '3', label: 'Nutrition', value: '1400 cal', icon: '🍎', completed: true },
-    { id: '4', label: 'Mindset', value: 'Focused', icon: '🧠', completed: true },
+    { id: '1', label: 'Sleep', value: '6.5 hrs', icon: '🌙', completed: true },
+    { id: '2', label: 'Nutrition', value: 'On Track', icon: '🍎', completed: true },
+    { id: '3', label: 'Training', value: 'Complete', icon: '💪', completed: true },
+    { id: '4', label: 'Mindset', value: 'Low Stress', icon: '🧘', completed: true },
   ]
 
   return (
@@ -26,35 +26,27 @@ export default function BottomMetrics() {
       className="relative z-10"
     >
       {/* 2x2 Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         {metrics.map((metric, index) => (
           <motion.div
             key={metric.id}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6 + index * 0.05 }}
-            className="cosmic-panel rounded-xl p-3 flex items-center gap-3"
+            className="bordered-box rounded-xl p-4 flex flex-col items-center gap-2"
           >
             {/* Icon */}
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-              style={{
-                background: 'radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%)',
-                border: '1px solid rgba(212, 175, 55, 0.3)',
-              }}
-            >
-              <span className="text-xl">{metric.icon}</span>
-            </div>
+            <div className="text-4xl">{metric.icon}</div>
 
-            {/* Text */}
-            <div className="flex-1 min-w-0">
-              <p className="text-gold text-xs font-semibold">{metric.label}</p>
-              <p className="text-white text-sm font-serif truncate">{metric.value}</p>
+            {/* Label and Value */}
+            <div className="text-center">
+              <p className="text-white text-xs font-medium mb-1">{metric.label}</p>
+              <p className="text-white/70 text-sm body-font">{metric.value}</p>
             </div>
 
             {/* Checkmark */}
             {metric.completed && (
-              <span className="text-green-500 text-sm flex-shrink-0">✓</span>
+              <span className="text-green-400 text-sm">✓</span>
             )}
           </motion.div>
         ))}
