@@ -29,7 +29,7 @@ export default function TodaysCompass() {
       <div className="flex items-center justify-center gap-3 mb-4">
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
         <h2 className="script-font text-3xl text-gold">
-          Today's Compass
+          Today&apos;s Compass
         </h2>
         <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
       </div>

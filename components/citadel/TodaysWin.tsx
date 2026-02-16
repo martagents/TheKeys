@@ -17,7 +17,7 @@ export default function TodaysWin() {
       <div className="flex items-center justify-center gap-3 mb-3">
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold"></div>
         <h2 className="script-font text-3xl text-gold">
-          Today's Win
+          Today&apos;s Win
         </h2>
         <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold"></div>
       </div>
@@ -33,7 +33,7 @@ export default function TodaysWin() {
           value={win}
           onChange={(e) => setWin(e.target.value)}
           className="w-full bg-transparent border-none text-white font-serif text-center text-base focus:outline-none resize-none"
-          placeholder="What's your win today?"
+          placeholder="What&apos;s your win today?"
           rows={2}
         />
       </div>
