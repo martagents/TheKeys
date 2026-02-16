@@ -17,10 +17,7 @@ import EnergyRatingDisplay from '../citadel/EnergyRatingDisplay'
 import NightlyCheckIn from '../citadel/NightlyCheckIn'
 import WeeklyReflection from '../citadel/WeeklyReflection'
 import OrnateCorners from '../decorations/OrnateCorners'
-import TodaysCompass from '../citadel/TodaysCompass'
 import TodaysWin from '../citadel/TodaysWin'
-import MoonOrb from '../citadel/MoonOrb'
-import BottomMetrics from '../citadel/BottomMetrics'
 
 export type PillarData = {
   id: string
@@ -29,7 +26,7 @@ export type PillarData = {
   color: string
 }
 
-type NavView = 'home' | 'today' | 'calendar' | 'warrior' | 'streaks' | 'sovereign'
+type NavView = 'home' | 'calendar' | 'warrior' | 'streaks' | 'sovereign'
 
 export default function TheCitadel() {
   const [selectedPillar, setSelectedPillar] = useState<string | null>(null)
@@ -72,15 +69,6 @@ export default function TheCitadel() {
   })
 
   // Render the current view
-  if (currentView === 'today') {
-    return (
-      <>
-        <DueTodayView />
-        <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
-      </>
-    )
-  }
-
   if (currentView === 'calendar') {
     return (
       <>
@@ -168,7 +156,7 @@ export default function TheCitadel() {
       {/* Ornate corner decorations */}
       <OrnateCorners />
 
-      {/* Header - THE KEYS / FOUNDER OS */}
+      {/* Header - THE KEYS / MY KEYS */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -180,10 +168,15 @@ export default function TheCitadel() {
           THE KEYS
         </p>
 
-        {/* FOUNDER OS */}
-        <h1 className="title-font text-4xl md:text-5xl text-white font-black tracking-widest mb-4">
-          FOUNDER OS
+        {/* MY KEYS */}
+        <h1 className="title-font text-4xl md:text-5xl text-white font-black tracking-widest mb-2">
+          MY KEYS
         </h1>
+
+        {/* Quote */}
+        <p className="text-white/70 text-sm body-font italic mb-4">
+          I am not measured by my inputs, but my outcomes.
+        </p>
 
         {/* Ornate line with diamond */}
         <div className="flex items-center justify-center gap-3">
@@ -192,11 +185,6 @@ export default function TheCitadel() {
           <div className="h-px w-24 bg-white/20"></div>
         </div>
       </motion.div>
-
-      {/* Moon Orb - Centerpiece */}
-      <div className="max-w-2xl mx-auto mb-6">
-        <MoonOrb />
-      </div>
 
       {/* Momentum & Energy Scores */}
       <motion.div
@@ -264,14 +252,8 @@ export default function TheCitadel() {
         {/* Energy Rating */}
         <EnergyRatingDisplay rating={energyRating} onRatingChange={setEnergyRating} />
 
-        {/* Today's Compass */}
-        <TodaysCompass />
-
         {/* Today's Win */}
         <TodaysWin />
-
-        {/* Bottom Metrics */}
-        <BottomMetrics />
       </div>
 
       {/* Footer */}
@@ -521,7 +503,6 @@ function BottomNav({
 }) {
   const navItems: Array<{ id: NavView; icon: string; label: string }> = [
     { id: 'home', icon: '◆', label: 'Home' },
-    { id: 'today', icon: '◈', label: 'Today' },
     { id: 'calendar', icon: '◉', label: 'Calendar' },
     { id: 'warrior', icon: '◇', label: 'Warrior' },
     { id: 'streaks', icon: '◊', label: 'Streaks' },

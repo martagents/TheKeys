@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { format } from 'date-fns'
 
@@ -16,23 +16,45 @@ interface TenXActivity {
 }
 
 export default function WarriorDashboard() {
-  const [activities, setActivities] = useState<TenXActivity[]>([
-    {
-      id: '1',
-      statement: 'Launch new product feature',
-      category: 'Business Impact',
-      scheduledDate: format(new Date(), 'yyyy-MM-dd'),
-      completed: false,
-    },
-    {
-      id: '2',
-      statement: 'Complete morning meditation routine',
-      category: 'Mental Peace & Sharpness',
-      scheduledDate: format(new Date(), 'yyyy-MM-dd'),
-      completed: true,
-      completedDate: format(new Date(), 'yyyy-MM-dd'),
-    },
-  ])
+  const [activities, setActivities] = useState<TenXActivity[]>([])
+
+  // Load activities from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('warrior-10x-activities')
+    if (saved) {
+      try {
+        setActivities(JSON.parse(saved))
+      } catch (e) {
+        console.error('Failed to load activities:', e)
+      }
+    } else {
+      // Default activities if none exist
+      setActivities([
+        {
+          id: '1',
+          statement: 'Launch new product feature',
+          category: 'Business Impact',
+          scheduledDate: format(new Date(), 'yyyy-MM-dd'),
+          completed: false,
+        },
+        {
+          id: '2',
+          statement: 'Complete morning meditation routine',
+          category: 'Mental Peace & Sharpness',
+          scheduledDate: format(new Date(), 'yyyy-MM-dd'),
+          completed: true,
+          completedDate: format(new Date(), 'yyyy-MM-dd'),
+        },
+      ])
+    }
+  }, [])
+
+  // Save activities to localStorage whenever they change
+  useEffect(() => {
+    if (activities.length > 0) {
+      localStorage.setItem('warrior-10x-activities', JSON.stringify(activities))
+    }
+  }, [activities])
 
   const [newStatement, setNewStatement] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<TenXCategory>('Business Impact')
@@ -128,7 +150,7 @@ export default function WarriorDashboard() {
         >
           WARRIOR
         </h1>
-        <p className="script-font text-2xl text-parchment">
+        <p className="title-font text-2xl text-parchment">
           Daily 10X Activities Tracker
         </p>
       </motion.div>
