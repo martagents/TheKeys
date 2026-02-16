@@ -10,7 +10,6 @@ import WarriorView from '../pillars/warrior/WarriorView'
 import DueTodayView from './DueTodayView'
 import CalendarView from '../calendar/CalendarView'
 import StreakView from './StreakView'
-import AnalyticsView from './AnalyticsView'
 import SovereignMagicianView from '../sovereign/SovereignMagicianView'
 import WarriorDashboard from './WarriorDashboard'
 import FaithStatementSection from '../citadel/FaithStatementSection'
@@ -102,15 +101,6 @@ export default function TheCitadel() {
     return (
       <>
         <WarriorDashboard />
-        <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
-      </>
-    )
-  }
-
-  if (currentView === 'analytics') {
-    return (
-      <>
-        <AnalyticsView />
         <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
       </>
     )
