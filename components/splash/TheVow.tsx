@@ -179,18 +179,18 @@ export default function TheVow({ onComplete }: TheVowProps) {
             className="text-center relative z-10"
           >
             <motion.h1
-              initial={{ letterSpacing: '0.5em', opacity: 0 }}
+              initial={{ letterSpacing: '0.3em', opacity: 0 }}
               animate={{
-                letterSpacing: '0.05em',
+                letterSpacing: '0.02em',
                 opacity: 1,
               }}
               transition={{
                 duration: 1.5,
                 ease: 'easeOut',
               }}
-              className="font-serif text-5xl md:text-7xl gold-gradient font-bold uppercase"
+              className="font-serif text-3xl md:text-5xl gold-gradient font-bold px-8 text-center leading-tight"
             >
-              I am not done.
+              I am not measured by my input, but by my output.
             </motion.h1>
           </motion.div>
         )}

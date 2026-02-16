@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import EnergyDashboard from '@/components/presence/EnergyDashboard'
 
 interface Spark {
   id: string
@@ -112,31 +113,13 @@ export default function PresenceView() {
           </AnimatePresence>
         </div>
 
-        {/* Mood Log */}
-        <div className="glass-dark rounded-2xl p-6">
+        {/* Energy Dashboard */}
+        <div>
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <span className="text-blue-400">💭</span>
-            Mood Log
+            <span className="text-purple-400">⚡</span>
+            Energy Dashboard
           </h3>
-          <div className="flex gap-3 justify-around">
-            {moods.map((emoji) => (
-              <motion.button
-                key={emoji}
-                onClick={() => {
-                  setMood(emoji)
-                  if ('vibrate' in navigator) navigator.vibrate(30)
-                }}
-                whileTap={{ scale: 0.9 }}
-                className={`text-4xl p-4 rounded-xl touch-target transition-all ${
-                  mood === emoji
-                    ? 'bg-gold/20 border-2 border-gold'
-                    : 'bg-steel/5 border-2 border-transparent'
-                }`}
-              >
-                {emoji}
-              </motion.button>
-            ))}
-          </div>
+          <EnergyDashboard />
         </div>
 
         {/* Sparks List (Shopping/Wish List) */}

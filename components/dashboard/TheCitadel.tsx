@@ -11,6 +11,12 @@ import DueTodayView from './DueTodayView'
 import CalendarView from '../calendar/CalendarView'
 import StreakView from './StreakView'
 import AnalyticsView from './AnalyticsView'
+import SovereignMagicianView from '../sovereign/SovereignMagicianView'
+import FaithStatementSection from '../citadel/FaithStatementSection'
+import EnergyRatingDisplay from '../citadel/EnergyRatingDisplay'
+import Daily10XSection from '../citadel/Daily10XSection'
+import NightlyCheckIn from '../citadel/NightlyCheckIn'
+import WeeklyReflection from '../citadel/WeeklyReflection'
 
 export type PillarData = {
   id: string
@@ -19,11 +25,12 @@ export type PillarData = {
   color: string
 }
 
-type NavView = 'home' | 'today' | 'calendar' | 'streaks' | 'analytics'
+type NavView = 'home' | 'today' | 'calendar' | 'streaks' | 'analytics' | 'sovereign'
 
 export default function TheCitadel() {
   const [selectedPillar, setSelectedPillar] = useState<string | null>(null)
   const [currentView, setCurrentView] = useState<NavView>('home')
+  const [energyRating, setEnergyRating] = useState(75) // Default energy rating
 
   // Mock data - will be replaced with Supabase data
   const pillars: PillarData[] = [
@@ -97,6 +104,24 @@ export default function TheCitadel() {
     )
   }
 
+  if (currentView === 'sovereign') {
+    return (
+      <>
+        <SovereignMagicianView />
+        <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
+      </>
+    )
+  }
+
+  // Filter warrior tasks based on day of week
+  const isFriday = new Date().getDay() === 5
+  const filteredWarriorTasks = dailyTasks.warrior.filter(task => {
+    if (task.name.includes('Weekly Review')) {
+      return isFriday
+    }
+    return true
+  })
+
   const toggleTask = (pillar: string, taskId: string) => {
     setDailyTasks((prev) => ({
       ...prev,
@@ -126,6 +151,18 @@ export default function TheCitadel() {
         </p>
       </motion.div>
 
+      {/* New Citadel Sections */}
+      <div className="max-w-2xl mx-auto space-y-3 mb-3 relative z-10">
+        {/* Faith Statement - Collapsible */}
+        <FaithStatementSection />
+
+        {/* Energy Rating */}
+        <EnergyRatingDisplay rating={energyRating} />
+
+        {/* Daily 10X */}
+        <Daily10XSection />
+      </div>
+
       {/* Warrior - Full width across top - Rising from bottom */}
       <div className="max-w-2xl mx-auto mb-3 relative z-10">
         <motion.div
@@ -150,7 +187,7 @@ export default function TheCitadel() {
             </button>
           </div>
           <div className="space-y-2">
-            {dailyTasks.warrior.map((task) => (
+            {filteredWarriorTasks.map((task) => (
               <button
                 key={task.id}
                 onClick={() => toggleTask('warrior', task.id)}
@@ -225,6 +262,12 @@ export default function TheCitadel() {
           onViewAll={() => setSelectedPillar('temple')}
           delay={0.7}
         />
+      </div>
+
+      {/* Nightly Check-In & Weekly Reflection */}
+      <div className="max-w-2xl mx-auto space-y-3 mt-4 mb-4 relative z-10">
+        <NightlyCheckIn />
+        <WeeklyReflection />
       </div>
 
       {/* Bottom Navigation */}
@@ -358,7 +401,7 @@ function BottomNav({
     { id: 'today', icon: '📋', label: 'Today' },
     { id: 'calendar', icon: '📅', label: 'Calendar' },
     { id: 'streaks', icon: '🔥', label: 'Streaks' },
-    { id: 'analytics', icon: '📊', label: 'Stats' },
+    { id: 'sovereign', icon: '👑', label: 'Sovereign' },
   ]
 
   return (
